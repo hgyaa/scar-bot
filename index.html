@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>scar bot — Command Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:          #08080f;
@@ -73,13 +73,13 @@
   }
 
   h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 3.2rem;
-    font-weight: 300;
-    font-style: italic;
+    font-weight: 600;
+    font-style: normal;
     color: #fff;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     margin-bottom: 14px;
   }
 
@@ -366,6 +366,50 @@
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
 
+  /* ── STARS ─── */
+  #stars-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── INVITE BTN ─── */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 24px;
+    pointer-events: none;
+  }
+
+  .invite-btn {
+    pointer-events: all;
+    background: rgba(197,168,224,0.10);
+    color: var(--accent);
+    border: 1px solid rgba(197,168,224,0.25);
+    border-radius: 4px;
+    padding: 8px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .invite-btn:hover {
+    background: rgba(197,168,224,0.18);
+    border-color: rgba(197,168,224,0.5);
+    color: #fff;
+    box-shadow: 0 0 18px rgba(197,168,224,0.12);
+  }
+
   @media (max-width: 560px) {
     .page-wrap { padding: 44px 14px 80px; }
     h1 { font-size: 2.4rem; }
@@ -373,6 +417,10 @@
 </style>
 </head>
 <body>
+<canvas id="stars-canvas"></canvas>
+<div class="top-bar">
+  <a class="invite-btn" href="https://discord.com/oauth2/authorize?client_id=1477811376050278503" target="_blank" rel="noopener">Invite Bot to Your Server</a>
+</div>
 <div class="page-wrap">
 
   <div class="header">
@@ -836,6 +884,52 @@
     s.style.animationDelay = `${i * 0.05}s`;
     obs.observe(s);
   });
+  // ── STARS ──
+  (function() {
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const COUNT = 160;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < COUNT; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.1 + 0.2,
+          alpha: Math.random() * 0.6 + 0.15,
+          speed: Math.random() * 0.4 + 0.05,
+          dir: Math.random() > 0.5 ? 1 : -1,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+      stars.forEach(s => {
+        const pulse = s.alpha + Math.sin(frame * s.speed * 0.04 + s.phase) * 0.18;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(210, 190, 240, ${Math.max(0.05, Math.min(0.85, pulse))})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    draw();
+  })();
 </script>
 </body>
 </html>
