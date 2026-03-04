@@ -3,362 +3,839 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>scar bot — Full Command Reference</title>
+<title>scar bot — Command Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#0b0b0f;color:#ddd;font-family:'Segoe UI',system-ui,sans-serif;padding:28px 14px}
-  h1{font-size:1.9rem;color:#fff;text-align:center;margin-bottom:4px}
-  .sub{text-align:center;color:#666;margin-bottom:26px;font-size:.9rem}
-  .search-row{display:flex;justify-content:center;margin-bottom:24px}
-  #search{background:#13131a;border:1px solid #252530;border-radius:8px;color:#ddd;padding:9px 16px;font-size:.95rem;width:100%;max-width:480px;outline:none}
-  #search:focus{border-color:#c9a0dc}
-  .toc{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:30px}
-  .toc a{background:#13131a;border:1px solid #252530;border-radius:5px;color:#aaa;padding:4px 11px;text-decoration:none;font-size:.8rem;transition:.15s}
-  .toc a:hover{background:#c9a0dc;color:#111;border-color:#c9a0dc}
-  .section{background:#111117;border:1px solid #1c1c26;border-radius:10px;padding:18px 20px;margin-bottom:16px}
-  .section h2{font-size:1rem;color:#c9a0dc;margin-bottom:13px;display:flex;align-items:center;gap:7px}
-  .cmd{background:#0b0b0f;border-left:3px solid #222230;border-radius:0 5px 5px 0;padding:8px 12px;margin-bottom:6px;transition:.12s}
-  .cmd:hover{border-left-color:#c9a0dc}
-  .cmd code{color:#e8c4ff;font-size:.85rem;font-family:'Courier New',monospace;display:block;margin-bottom:2px}
-  .cmd .desc{color:#888;font-size:.79rem;line-height:1.45}
-  .badge{display:inline-block;font-size:.68rem;padding:1px 6px;border-radius:3px;margin-top:4px;font-weight:700;letter-spacing:.3px}
-  .o{background:#2d1010;color:#ff7070}
-  .a{background:#101c30;color:#70b0ff}
-  .m{background:#102310;color:#70e090}
-  .s{background:#251025;color:#d070ff}
-  .e{background:#252010;color:#f0d060}
-  .hidden{display:none!important}
-  @media(max-width:560px){body{padding:12px 8px}.section{padding:14px 12px}}
+  :root {
+    --bg:          #08080f;
+    --surface:     #0d0d18;
+    --surface2:    #111120;
+    --border:      #1a1a2c;
+    --border2:     #222235;
+    --accent:      #c5a8e0;
+    --accent-dim:  #7a5fa0;
+    --accent-pale: rgba(197,168,224,0.08);
+    --text:        #d4d4e8;
+    --muted:       #636380;
+    --dim:         #3e3e58;
+    --expo:        cubic-bezier(0.16, 1, 0.3, 1);
+    --smooth:      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 1000px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(197,168,224,0.04) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 20px 100px;
+  }
+
+  /* ── HEADER ─── */
+  .header {
+    text-align: center;
+    margin-bottom: 52px;
+    opacity: 0;
+    transform: translateY(-18px);
+    animation: riseIn 1s var(--expo) 0.1s forwards;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    color: var(--accent-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+  .sub strong { color: var(--accent); font-weight: 400; }
+
+  /* ── SEARCH ─── */
+  .search-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: riseIn 1s var(--expo) 0.25s forwards;
+  }
+
+  .search-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .search-label {
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: color 0.4s var(--expo);
+  }
+  .search-wrap:focus-within .search-label { color: var(--accent-dim); }
+
+  #search {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border2);
+    color: var(--text);
+    padding: 10px 4px 10px 52px;
+    font-size: 0.86rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.4s var(--expo);
+    letter-spacing: 0.01em;
+  }
+  #search::placeholder { color: var(--dim); }
+  #search:focus { border-color: var(--accent-dim); }
+
+  /* ── TOC ─── */
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: riseIn 1s var(--expo) 0.38s forwards;
+  }
+
+  .toc a {
+    color: var(--muted);
+    padding: 4px 11px;
+    text-decoration: none;
+    font-size: 0.71rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    white-space: nowrap;
+  }
+  .toc a:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-pale);
+  }
+
+  /* ── LEGEND ─── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: riseIn 1s var(--expo) 0.48s forwards;
+  }
+  .legend-label { color: var(--dim); font-size: 0.7rem; margin-left: 2px; }
+
+  /* ── SECTIONS ─── */
+  .section {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 7px;
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.35s var(--smooth);
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .section:hover { border-color: var(--border2); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s;
+    gap: 12px;
+  }
+  .section-header:hover { background: rgba(197,168,224,0.02); }
+
+  .section-header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .section-count {
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.03em;
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+  }
+
+  .chevron {
+    width: 13px; height: 13px;
+    flex-shrink: 0;
+    color: var(--dim);
+    transition: transform 0.55s var(--expo), color 0.3s;
+  }
+  .section.open .chevron {
+    transform: rotate(180deg);
+    color: var(--accent-dim);
+  }
+
+  /* grid trick for perfectly smooth height */
+  .section-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.55s var(--expo);
+  }
+  .section.open .section-body {
+    grid-template-rows: 1fr;
+  }
+
+  .section-body-inner {
+    overflow: hidden;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .section.open .section-body-inner { padding-bottom: 12px; }
+
+  /* ── COMMANDS ─── */
+  .cmd {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 13px;
+    position: relative;
+    overflow: hidden;
+    transition:
+      border-color   0.3s var(--smooth),
+      transform      0.35s var(--expo),
+      box-shadow     0.35s var(--smooth);
+  }
+
+  .cmd::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent-dim) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s var(--smooth);
+  }
+
+  .cmd:hover {
+    border-color: var(--border2);
+    transform: translateX(3px);
+    box-shadow: -2px 0 20px rgba(197,168,224,0.04), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .cmd:hover::after { opacity: 1; }
+
+  .cmd code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.79rem;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+
+  .cmd .desc {
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.58;
+    font-weight: 300;
+  }
+
+  .cmd .badge { margin-top: 6px; }
+
+  /* staggered cascade when section opens */
+  .section.open .cmd {
+    animation: cmdReveal 0.45s var(--expo) both;
+  }
+  .section.open .cmd:nth-child(1)  { animation-delay: 0.00s; }
+  .section.open .cmd:nth-child(2)  { animation-delay: 0.03s; }
+  .section.open .cmd:nth-child(3)  { animation-delay: 0.06s; }
+  .section.open .cmd:nth-child(4)  { animation-delay: 0.09s; }
+  .section.open .cmd:nth-child(5)  { animation-delay: 0.115s; }
+  .section.open .cmd:nth-child(6)  { animation-delay: 0.135s; }
+  .section.open .cmd:nth-child(7)  { animation-delay: 0.15s; }
+  .section.open .cmd:nth-child(8)  { animation-delay: 0.165s; }
+  .section.open .cmd:nth-child(9)  { animation-delay: 0.175s; }
+  .section.open .cmd:nth-child(n+10) { animation-delay: 0.185s; }
+
+  @keyframes cmdReveal {
+    from { opacity: 0; transform: translateY(7px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BADGES ─── */
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .o { background: rgba(255, 90, 90, 0.07); color: #d86060; border: 1px solid rgba(255,90,90,0.13); }
+  .a { background: rgba(90,160,255, 0.07); color: #6898d8; border: 1px solid rgba(90,160,255,0.13); }
+  .m { background: rgba(90,220,130, 0.07); color: #60c080; border: 1px solid rgba(90,220,130,0.13); }
+  .s { background: rgba(200, 90,255, 0.07); color: #b060d8; border: 1px solid rgba(200,90,255,0.13); }
+  .e { background: rgba(230,190, 70, 0.06); color: #c8a850; border: 1px solid rgba(230,190,70,0.11); }
+
+  .hidden { display: none !important; }
+
+  /* ── KEYFRAMES ─── */
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes sectionReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+
+  @media (max-width: 560px) {
+    .page-wrap { padding: 44px 14px 80px; }
+    h1 { font-size: 2.4rem; }
+  }
 </style>
 </head>
 <body>
+<div class="page-wrap">
 
-<h1>&#x1F43E; scar bot &#x2014; Command Reference</h1>
-<p class="sub">Default prefix: <strong style="color:#c9a0dc">,</strong> &nbsp;|&nbsp; Every working command listed here</p>
+  <div class="header">
+    <div class="eyebrow">discord bot</div>
+    <h1>scar bot</h1>
+    <p class="sub">prefix <strong>,</strong> &nbsp;&middot;&nbsp; every working command, right here</p>
+  </div>
 
-<div class="search-row">
-  <input type="text" id="search" placeholder="Search commands..." oninput="filter(this.value)">
+  <div class="search-row">
+    <div class="search-wrap">
+      <span class="search-label">search</span>
+      <input type="text" id="search" placeholder="type a command or keyword&hellip;" oninput="filterCmds(this.value)" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#perms">permissions</a>
+    <a href="#mod">moderation</a>
+    <a href="#filter">filter</a>
+    <a href="#jail">jail</a>
+    <a href="#economy">economy</a>
+    <a href="#welcome">auto welcome</a>
+    <a href="#wlc">wlc points</a>
+    <a href="#bump">bump reminder</a>
+    <a href="#vanity">vanity</a>
+    <a href="#ar">autoresponder</a>
+    <a href="#reacts">reacts</a>
+    <a href="#embed">embed builder</a>
+    <a href="#logging">logging</a>
+    <a href="#invitetracker">invite tracker</a>
+    <a href="#roles">roles</a>
+    <a href="#swearjar">swear jar</a>
+    <a href="#utility">utility</a>
+    <a href="#fun">fun</a>
+    <a href="#owner">owner only</a>
+  </div>
+
+  <div class="legend">
+    <span class="badge o">Owner</span>
+    <span class="badge a">Admin</span>
+    <span class="badge m">Mod</span>
+    <span class="badge s">Special</span>
+    <span class="badge e">Everyone</span>
+    <span class="legend-label">— required permission level</span>
+  </div>
+
+  <!-- PERMISSIONS -->
+  <div class="section" id="perms">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Permission Management <span class="section-count">15 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,mod let @user</code><div class="desc">Grant a user Mod-level bot permissions.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,mod unlet @user</code><div class="desc">Revoke Mod-level bot permissions from a user.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,mod let list</code><div class="desc">List all users with Mod permissions.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,admin let @user</code><div class="desc">Grant a user Admin-level bot permissions.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,admin unlet @user</code><div class="desc">Revoke Admin-level bot permissions from a user.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,admin let list</code><div class="desc">List all users with Admin permissions.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,special let @user</code><div class="desc">Grant Special access (publish, ghost commands).</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,special unlet @user</code><div class="desc">Revoke Special access from a user.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,special let list</code><div class="desc">List all Special users.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fakepermissions add @role perm1, perm2</code><div class="desc">Grant fake bot permissions to a role (comma-separated). Valid perms: administrator, ban_members, kick_members, manage_guild, manage_channels, manage_roles, manage_messages, moderate_members, and more.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fakepermissions remove @role perm1, perm2</code><div class="desc">Remove fake permissions from a role.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fakepermissions list</code><div class="desc">View all fake permissions configured in the server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fakepermissions list @role</code><div class="desc">View fake permissions for one specific role.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fakepermissions reset</code><div class="desc">Wipe all fake permissions entirely.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,fp ...</code><div class="desc">Shorthand alias for all ,fakepermissions commands.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- MODERATION -->
+  <div class="section" id="mod">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Moderation <span class="section-count">25 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,ban @user [reason]</code><div class="desc">Ban a user from the server. DMs them the custom ban message if one is set.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,ban message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to banned users. Add a URL at the end to include an image or GIF.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,unban [user ID]</code><div class="desc">Unban a user by their Discord ID.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,kick @user [reason]</code><div class="desc">Kick a user from the server.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,kick message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to kicked users.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,timeout @user [duration] [reason]</code><div class="desc">Timeout a user. Duration examples: 10m, 1h, 2d, 7d.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,timeout message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to timed-out users.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,warn @user [reason]</code><div class="desc">Warn a user and DM them the reason.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,warn message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent when warning a user.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,warnings @user</code><div class="desc">View all warnings for a user, each with a unique ID code.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,warnings remove @user [warning ID]</code><div class="desc">Delete a single warning by its code.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,warnings clear @user</code><div class="desc">Clear every warning for a user at once.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,warning ...</code><div class="desc">Alias for all ,warnings commands.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,clear [1-500]</code><div class="desc">Bulk-delete up to 500 messages in the current channel.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,clear @user [1-500]</code><div class="desc">Delete only a specific user's messages from the current channel.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,lock</code><div class="desc">Lock the current channel so @everyone can no longer send messages.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,unlock</code><div class="desc">Unlock the current channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,lockdown</code><div class="desc">Lock every text channel in the server at once.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,unlockdown</code><div class="desc">Unlock every text channel in the server at once.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,nuke [#channel]</code><div class="desc">Deletes and recreates a channel, wiping all messages. Defaults to the current channel. Shows confirm/cancel buttons.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,snipe</code><div class="desc">Show the last deleted message in this channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,snipe [number]</code><div class="desc">Show an older snipe. e.g. ,snipe 2 for the second-to-last deleted message.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,cs</code><div class="desc">Clear all saved snipes for the current channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,moderation logs @user</code><div class="desc">View a staff member's full moderation action history (bans, kicks, warns, etc.), paginated.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,moderation reset @user</code><div class="desc">Clear all moderation logs for a specific staff member.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="section" id="filter">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Word &amp; Link Filter <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,filter add word1 word2 word3</code><div class="desc">Add words to the auto-delete filter (space separated).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter remove word1 word2</code><div class="desc">Remove words from the filter.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter list</code><div class="desc">View all filtered words, paginated with navigation buttons.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for sending filtered words. Duration only applies to timeout, e.g. ,filter punishment timeout 10m</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter links on</code><div class="desc">Enable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter links off</code><div class="desc">Disable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter links punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for posting Discord invite links.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- JAIL -->
+  <div class="section" id="jail">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Jail System <span class="section-count">3 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,setup jail</code><div class="desc">Auto-creates the jail role and jail channel. Run this once before using jail.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,jail @user [reason]</code><div class="desc">Jail a user: strips all their roles, applies the jail role, notifies them in the jail channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,unjail @user [reason]</code><div class="desc">Release a jailed user and restore all their previous roles automatically.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- ECONOMY -->
+  <div class="section" id="economy">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Economy <span class="section-count">10 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,bag</code><div class="desc">Check your own coin balance.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,bag daily</code><div class="desc">Claim your daily $5,000 reward. Resets every 24 hours.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,bag set @user [amount]</code><div class="desc">Set a user's balance to an exact amount.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,pay @user [amount]</code><div class="desc">Transfer coins to another user. Shows a confirm/cancel prompt first.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,cgamble [amount] [heads/tails]</code><div class="desc">Gamble on a coin flip. Use all or max as the amount (capped at $250,000). Win = 2x your bet.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,cg [amount] [heads/tails]</code><div class="desc">Shorthand for ,cgamble.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,leaderboard</code><div class="desc">View the top 10 richest members in the server.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,lb</code><div class="desc">Shorthand for ,leaderboard.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,leaderboard exempt @user</code><div class="desc">Toggle a user's exemption from the economy leaderboard. Run again to un-exempt.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,give everyone [amount]</code><div class="desc">Add coins to every single member's balance at once.</div><span class="badge o">Owner</span></div>
+    </div></div>
+  </div>
+
+  <!-- AUTO WELCOME -->
+  <div class="section" id="welcome">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Auto Welcomer <span class="section-count">9 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,welcome set #channel [message]</code><div class="desc">Add a welcome channel and optionally set its message in one go. Supports full embed script syntax. Max 4 channels.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome message #channel [message]</code><div class="desc">Update or set the message for an already-added welcome channel.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome remove #channel</code><div class="desc">Remove a channel from the welcome list.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome test</code><div class="desc">Preview welcome messages for all configured channels.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome test #channel</code><div class="desc">Preview the welcome message for one specific channel.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome on</code><div class="desc">Enable welcome messages.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome off</code><div class="desc">Disable welcome messages (settings kept).</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome reset</code><div class="desc">Wipe all welcome settings entirely.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,welcome</code><div class="desc">View current welcome system status and configured channels.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- WLC POINTS -->
+  <div class="section" id="wlc">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>WLC Points <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,wlc</code><div class="desc">Welcome the last person who joined. Gives YOU (the runner) one point. Only works once per join — shows an error if someone already welcomed them.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc message [text]</code><div class="desc">Set the welcome message. Variables: {welcome.sender}, {welcome.sender.name}, {welcome.receiver}, {welcome.receiver.name}</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc thankyou message [text]</code><div class="desc">Set the points notification (auto-deletes after 5 seconds). Variables: {welcome.receiver}, {welcome.points}</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc points @user</code><div class="desc">View a user's total welcome points.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc points reset @user</code><div class="desc">Reset a user's welcome points to zero.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc leaderboard</code><div class="desc">Top 10 welcomers by points (exempt users hidden).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,wlc leaderboard exempt @user</code><div class="desc">Toggle a user's leaderboard exemption. Run again to un-exempt.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- BUMP REMINDER -->
+  <div class="section" id="bump">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Bump Reminder <span class="section-count">9 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,bumpreminder channel #channel</code><div class="desc">Set which channel bump reminders and thank-you messages are posted in.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder remind message [text]</code><div class="desc">Set the message sent when it's time to bump again (fires 2 hours after last bump). Use {bumpreminder.last_user_bump} to mention the last bumper.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder thank you [text]</code><div class="desc">Set the message sent immediately after a successful Disboard bump. Use {user.mention}, {bumpreminder.next_bump}.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder autolock on</code><div class="desc">Lock the bump channel after each bump, auto-unlock when the 2-hour reminder fires.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder autolock off</code><div class="desc">Disable auto-lock.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder on</code><div class="desc">Enable the bump reminder system.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder off</code><div class="desc">Disable the bump reminder system (settings saved).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder reset</code><div class="desc">Reset both remind and thank-you messages to blank.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,bumpreminder check</code><div class="desc">View current config: channel, messages, autolock state, and when the next bump is due.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- VANITY -->
+  <div class="section" id="vanity">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Vanity Rewards <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,vanity set [text]</code><div class="desc">Set the vanity text to watch for in user bios. e.g. ,vanity set .gg/scar — enables the system automatically.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity reward @role1 @role2</code><div class="desc">Set the role(s) awarded to users who have the vanity in their bio.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity message #channel [text]</code><div class="desc">Set the thank-you message channel and content. Variables: {user.mention}, {vanity.reward}</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity thankyou #channel [text]</code><div class="desc">Alias for ,vanity message.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity on</code><div class="desc">Enable the vanity reward system.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity off</code><div class="desc">Disable the vanity reward system.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,vanity</code><div class="desc">View current vanity config.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- AUTORESPONDER -->
+  <div class="section" id="ar">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Autoresponder <span class="section-count">6 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,ar add [trigger] [response]</code><div class="desc">Add a new autoresponder. Wrap trigger in quotes for spaces: ,ar add "good morning" Good morning!</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ar create [trigger] [response]</code><div class="desc">Alias for ,ar add.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ar remove [trigger]</code><div class="desc">Remove an autoresponder by its trigger word/phrase.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ar delete [trigger]</code><div class="desc">Alias for ,ar remove.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ar list</code><div class="desc">View all active autoresponders.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,autoresponder ...</code><div class="desc">Full-name alias for all ,ar commands.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- REACTS -->
+  <div class="section" id="reacts">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Message Reacts &amp; Auto Reacts <span class="section-count">11 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,mr add [trigger] emoji1 emoji2</code><div class="desc">React with emojis whenever any message contains the trigger word.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,mr add @user [trigger] emoji1 emoji2</code><div class="desc">React with emojis only when a specific user's message contains the trigger.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,mr remove [trigger]</code><div class="desc">Remove a global message react by its trigger.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,mr remove @user [trigger]</code><div class="desc">Remove a user-specific message react.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,mr delete ...</code><div class="desc">Alias for ,mr remove.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,mr list</code><div class="desc">View all active message reacts.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,messagereact ...</code><div class="desc">Full-name alias for all ,mr commands.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,autoreact add @user emoji1 emoji2 emoji3</code><div class="desc">React to EVERY message a user sends with these emojis, no trigger needed.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,autoreact remove @user</code><div class="desc">Stop auto-reacting to all of a user's messages.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,autoreact delete @user</code><div class="desc">Alias for ,autoreact remove.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,autoreact list</code><div class="desc">View all active auto reacts.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- EMBED BUILDER -->
+  <div class="section" id="embed">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Embed Builder <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,embed create [name]</code><div class="desc">Create a new named embed. Opens an interactive button-based editor with live preview.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed edit [name]</code><div class="desc">Re-open the interactive editor for an existing embed.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed preview [name]</code><div class="desc">Preview how an embed currently looks.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed list</code><div class="desc">List all saved embed names.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed remove [name]</code><div class="desc">Permanently delete a saved embed.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed colour #RRGGBB</code><div class="desc">Set the default embed colour for this server. e.g. ,embed colour #FF69B4</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,embed color #RRGGBB</code><div class="desc">Alias for ,embed colour.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- LOGGING -->
+  <div class="section" id="logging">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Server Logging <span class="section-count">2 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,log set #channel</code><div class="desc">Set the log channel and enable logging. Logs message edits/deletes, joins/leaves, bans, kicks, timeouts, role changes, nickname changes, and more.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,log off</code><div class="desc">Disable server logging (channel setting is kept).</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- INVITE TRACKER -->
+  <div class="section" id="invitetracker">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Invite Tracker <span class="section-count">4 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,invitetracker set #channel</code><div class="desc">Set the channel where invite tracking logs are posted (shows who invited each new member).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,invitetracker off</code><div class="desc">Disable the invite tracker.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,it set #channel</code><div class="desc">Shorthand for ,invitetracker set.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,it off</code><div class="desc">Shorthand for ,invitetracker off.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- ROLES -->
+  <div class="section" id="roles">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Role Management <span class="section-count">3 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,role @user [role name / @role / ID]</code><div class="desc">Toggle a role on a member — assigns if they don't have it, removes if they do.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,role create [name]</code><div class="desc">Create a new server role with the given name.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,role icon @role [emoji or image URL]</code><div class="desc">Set an icon for a role. Requires server Level 2 Boost.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- SWEAR JAR -->
+  <div class="section" id="swearjar">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Swear Jar <span class="section-count">11 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,swearjar on</code><div class="desc">Enable the swear jar — bot tracks and responds when tracked words are used.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar off</code><div class="desc">Disable the swear jar.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar words add word1,word2,word3</code><div class="desc">Add words to track (comma separated, no spaces between).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar words remove word1,word2</code><div class="desc">Remove words from tracking.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar words list</code><div class="desc">View all currently tracked words.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar words reset</code><div class="desc">Reset the word list back to built-in defaults.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar message [text]</code><div class="desc">Customize the swear notification message. Variables: {user.mention}, {user.name}, {count}</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar check [@user]</code><div class="desc">Check how many swears someone has. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,swearjar reset @user</code><div class="desc">Reset a user's swear count to zero.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,swearjar leaderboard</code><div class="desc">Top 10 biggest swearers in the server.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,sj ...</code><div class="desc">Shorthand alias for all ,swearjar commands.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- UTILITY -->
+  <div class="section" id="utility">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Utility <span class="section-count">35 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,avatar [@user]</code><div class="desc">Show a user's avatar. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,av [@user]</code><div class="desc">Shorthand for ,avatar.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,banner [@user]</code><div class="desc">Show a user's profile banner.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,userinfo [@user]</code><div class="desc">Full user info card: username, ID, join date, account age, roles, badges, boost status. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,ui [@user]</code><div class="desc">Shorthand for ,userinfo.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,server icon</code><div class="desc">Show the server's icon as a large image.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,server banner</code><div class="desc">Show the server's banner as a large image.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,afk [reason]</code><div class="desc">Set yourself as AFK with an optional reason. Bot auto-replies when someone mentions you. Cleared automatically when you next send a message.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,time [@user]</code><div class="desc">Check a user's current local time (they must have set their timezone). Defaults to yourself.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,time set [Timezone]</code><div class="desc">Set your timezone using IANA format. e.g. America/New_York, Europe/London, Asia/Tokyo</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,time on</code><div class="desc">Make your timezone visible to others (default state).</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,time off</code><div class="desc">Hide your timezone so others can't check your local time.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,prefix [new prefix]</code><div class="desc">Change the bot's command prefix for this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,valid [emoji]</code><div class="desc">Set the bot's success checkmark emoji for this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,invalid [emoji]</code><div class="desc">Set the bot's error/fail emoji for this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,variables</code><div class="desc">View all user variables like {user.mention}, {user.name}, etc.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables user</code><div class="desc">Show all user-related variables.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables guild</code><div class="desc">Show all server/guild variables.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables server</code><div class="desc">Alias for ,variables guild.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables date</code><div class="desc">Show all date and time variables.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables bump</code><div class="desc">Show bump reminder variables.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,variables helpers</code><div class="desc">Show helper functions like {lower(text)}, {upper(text)}.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,vars ...</code><div class="desc">Shorthand for all ,variables subcommands.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,cmd alias [command] [shortcut]</code><div class="desc">Create a command shortcut. e.g. ,cmd alias ban b — now ,b runs ,ban</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,cmd alias remove [shortcut]</code><div class="desc">Remove a command shortcut.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,cmd alias list</code><div class="desc">View all active command shortcuts for this server.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,livechat on #channel</code><div class="desc">Mirror every message sent in this channel into another channel in real time.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,livechat off</code><div class="desc">Stop mirroring messages from this channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,publish #channel [message]</code><div class="desc">Send a message to another channel as the bot.</div><span class="badge s">Special</span></div>
+      <div class="cmd"><code>,ghost on</code><div class="desc">Enable ghost mode — bot ignores all non-owner commands server-wide.</div><span class="badge s">Special</span></div>
+      <div class="cmd"><code>,ghost off</code><div class="desc">Disable ghost mode.</div><span class="badge s">Special</span></div>
+      <div class="cmd"><code>,setup j2c</code><div class="desc">Auto-create a Join-to-Create voice channel system with a management panel.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,customize avatar [image URL or attachment]</code><div class="desc">Set a per-server avatar for the bot (unique to each server). Attach an image or provide a URL.</div><span class="badge o">Server Owner</span></div>
+      <div class="cmd"><code>,customize avatar reset</code><div class="desc">Reset the bot's server avatar back to the global default.</div><span class="badge o">Server Owner</span></div>
+      <div class="cmd"><code>,help</code><div class="desc">Shows the bot's help menu.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,bless [@user]</code><div class="desc">Sends a random Bible verse. Optionally bless another user by mentioning them.</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+  <!-- FUN -->
+  <div class="section" id="fun">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Fun <span class="section-count">2 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,coinflip</code><div class="desc">Flip a coin — bot dramatically reveals heads or tails after a short delay.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,uwu [text]</code><div class="desc">UwU-ifies the text you provide (replaces r/l with w, adds ny sounds, random face at end).</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+  <!-- OWNER ONLY -->
+  <div class="section" id="owner">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Owner Only <span class="section-count">8 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,status</code><div class="desc">Bot stats panel: ping, uptime, memory usage, server count, cached users, Node.js version, Discord.js version.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,serverlist</code><div class="desc">Paginated list (5 per page) of every server the bot is in. Shows: name, ID, owner, member count, channel counts, boost tier, and an auto-generated invite link.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,cmd list</code><div class="desc">Full command directory categorised by type.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,cmd checklist</code><div class="desc">Run a diagnostic scan on all registered commands. Shows new, missing, and passing command counts.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,aj whitelist [user ID]</code><div class="desc">Add a user to the global bot owner whitelist.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,aj unwhitelist [user ID]</code><div class="desc">Remove a user from the global owner whitelist.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,aj list</code><div class="desc">View all whitelisted owner users.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,bot customization list</code><div class="desc">View all per-server bot customizations (avatars, embed colors, etc.) across every server.</div><span class="badge o">Owner</span></div>
+    </div></div>
+  </div>
+
 </div>
-
-<div class="toc">
-  <a href="#perms">&#x1F511; Permissions</a>
-  <a href="#mod">&#x2694;&#xFE0F; Moderation</a>
-  <a href="#filter">&#x1F6AB; Filter</a>
-  <a href="#jail">&#x1F512; Jail</a>
-  <a href="#economy">&#x1F4B0; Economy</a>
-  <a href="#welcome">&#x1F44B; Auto Welcome</a>
-  <a href="#wlc">&#x1F389; WLC Points</a>
-  <a href="#bump">&#x1F4E3; Bump Reminder</a>
-  <a href="#vanity">&#x2728; Vanity</a>
-  <a href="#ar">&#x1F916; Autoresponder</a>
-  <a href="#reacts">&#x1F4AC; Reacts</a>
-  <a href="#embed">&#x1F3A8; Embed Builder</a>
-  <a href="#logging">&#x1F4CB; Logging</a>
-  <a href="#invitetracker">&#x1F517; Invite Tracker</a>
-  <a href="#roles">&#x1F3F7;&#xFE0F; Roles</a>
-  <a href="#swearjar">&#x1FAD9; Swear Jar</a>
-  <a href="#utility">&#x1F6E0;&#xFE0F; Utility</a>
-  <a href="#fun">&#x1F3B2; Fun</a>
-  <a href="#owner">&#x1F451; Owner Only</a>
-</div>
-
-<div class="section" style="padding:11px 18px;margin-bottom:20px">
-  <span class="badge o">Owner</span>&nbsp;
-  <span class="badge a">Admin</span>&nbsp;
-  <span class="badge m">Mod</span>&nbsp;
-  <span class="badge s">Special</span>&nbsp;
-  <span class="badge e">Everyone</span>
-  <span style="color:#555;font-size:.8rem;margin-left:10px">&#x2014; required permission level</span>
-</div>
-
-<!-- PERMISSIONS -->
-<div class="section" id="perms">
-  <h2>&#x1F511; Permission Management</h2>
-  <div class="cmd"><code>,mod let @user</code><div class="desc">Grant a user Mod-level bot permissions.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,mod unlet @user</code><div class="desc">Revoke Mod-level bot permissions from a user.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,mod let list</code><div class="desc">List all users with Mod permissions.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,admin let @user</code><div class="desc">Grant a user Admin-level bot permissions.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,admin unlet @user</code><div class="desc">Revoke Admin-level bot permissions from a user.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,admin let list</code><div class="desc">List all users with Admin permissions.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,special let @user</code><div class="desc">Grant Special access (publish, ghost commands).</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,special unlet @user</code><div class="desc">Revoke Special access from a user.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,special let list</code><div class="desc">List all Special users.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fakepermissions add @role perm1, perm2</code><div class="desc">Grant fake bot permissions to a role (comma-separated). Valid perms include: administrator, ban_members, kick_members, manage_guild, manage_channels, manage_roles, manage_messages, moderate_members, and more.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fakepermissions remove @role perm1, perm2</code><div class="desc">Remove fake permissions from a role.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fakepermissions list</code><div class="desc">View all fake permissions configured in the server.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fakepermissions list @role</code><div class="desc">View fake permissions for one specific role.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fakepermissions reset</code><div class="desc">Wipe all fake permissions entirely.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,fp ...</code><div class="desc">Shorthand alias for all ,fakepermissions commands.</div><span class="badge a">Admin</span></div>
-</div>
-
-<!-- MODERATION -->
-<div class="section" id="mod">
-  <h2>&#x2694;&#xFE0F; Moderation</h2>
-  <div class="cmd"><code>,ban @user [reason]</code><div class="desc">Ban a user from the server. DMs them the custom ban message if one is set.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,ban message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to banned users. Add a URL at the end to include an image or GIF.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,unban [user ID]</code><div class="desc">Unban a user by their Discord ID.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,kick @user [reason]</code><div class="desc">Kick a user from the server.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,kick message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to kicked users.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,timeout @user [duration] [reason]</code><div class="desc">Timeout a user. Duration examples: 10m, 1h, 2d, 7d.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,timeout message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent to timed-out users.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,warn @user [reason]</code><div class="desc">Warn a user and DM them the reason.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,warn message [text] [optional gif/image URL]</code><div class="desc">Set the custom DM message sent when warning a user.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,warnings @user</code><div class="desc">View all warnings for a user, each with a unique ID code.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,warnings remove @user [warning ID]</code><div class="desc">Delete a single warning by its code.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,warnings clear @user</code><div class="desc">Clear every warning for a user at once.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,warning ...</code><div class="desc">Alias for all ,warnings commands.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,clear [1-500]</code><div class="desc">Bulk-delete up to 500 messages in the current channel.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,clear @user [1-500]</code><div class="desc">Delete only a specific user's messages from the current channel.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,lock</code><div class="desc">Lock the current channel so @everyone can no longer send messages.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,unlock</code><div class="desc">Unlock the current channel.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,lockdown</code><div class="desc">Lock every text channel in the server at once.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,unlockdown</code><div class="desc">Unlock every text channel in the server at once.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,nuke [#channel]</code><div class="desc">Deletes and recreates a channel, wiping all messages. Defaults to the current channel. Shows confirm/cancel buttons.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,snipe</code><div class="desc">Show the last deleted message in this channel.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,snipe [number]</code><div class="desc">Show an older snipe. e.g. ,snipe 2 for the second-to-last deleted message.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,cs</code><div class="desc">Clear all saved snipes for the current channel.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,moderation logs @user</code><div class="desc">View a staff member's full moderation action history (bans, kicks, warns, etc.), paginated.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,moderation reset @user</code><div class="desc">Clear all moderation logs for a specific staff member.</div><span class="badge a">Admin</span></div>
-</div>
-
-<!-- FILTER -->
-<div class="section" id="filter">
-  <h2>&#x1F6AB; Word &amp; Link Filter</h2>
-  <div class="cmd"><code>,filter add word1 word2 word3</code><div class="desc">Add words to the auto-delete filter (space separated).</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter remove word1 word2</code><div class="desc">Remove words from the filter.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter list</code><div class="desc">View all filtered words, paginated with navigation buttons.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for sending filtered words. Duration only applies to timeout, e.g. ,filter punishment timeout 10m</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter links on</code><div class="desc">Enable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter links off</code><div class="desc">Disable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,filter links punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for posting Discord invite links.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- JAIL -->
-<div class="section" id="jail">
-  <h2>&#x1F512; Jail System</h2>
-  <div class="cmd"><code>,setup jail</code><div class="desc">Auto-creates the jail role and jail channel. Run this once before using jail.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,jail @user [reason]</code><div class="desc">Jail a user: strips all their roles, applies the jail role, notifies them in the jail channel.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,unjail @user [reason]</code><div class="desc">Release a jailed user and restore all their previous roles automatically.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- ECONOMY -->
-<div class="section" id="economy">
-  <h2>&#x1F4B0; Economy</h2>
-  <div class="cmd"><code>,bag</code><div class="desc">Check your own coin balance.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,bag daily</code><div class="desc">Claim your daily $5,000 reward. Resets every 24 hours.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,bag set @user [amount]</code><div class="desc">Set a user's balance to an exact amount.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,pay @user [amount]</code><div class="desc">Transfer coins to another user. Shows a confirm/cancel prompt first.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,cgamble [amount] [heads/tails]</code><div class="desc">Gamble on a coin flip. Use all or max as the amount (capped at $250,000). Win = 2x your bet.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,cg [amount] [heads/tails]</code><div class="desc">Shorthand for ,cgamble.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,leaderboard</code><div class="desc">View the top 10 richest members in the server.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,lb</code><div class="desc">Shorthand for ,leaderboard.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,leaderboard exempt @user</code><div class="desc">Toggle a user's exemption from the economy leaderboard. Run again to un-exempt.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,give everyone [amount]</code><div class="desc">Add coins to every single member's balance at once.</div><span class="badge o">Owner</span></div>
-</div>
-
-<!-- AUTO WELCOME -->
-<div class="section" id="welcome">
-  <h2>&#x1F44B; Auto Welcomer (Join Messages)</h2>
-  <div class="cmd"><code>,welcome set #channel [message]</code><div class="desc">Add a welcome channel and optionally set its message in one go. Supports full embed script syntax. Max 4 channels.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome message #channel [message]</code><div class="desc">Update or set the message for an already-added welcome channel.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome remove #channel</code><div class="desc">Remove a channel from the welcome list.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome test</code><div class="desc">Preview welcome messages for all configured channels.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome test #channel</code><div class="desc">Preview the welcome message for one specific channel.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome on</code><div class="desc">Enable welcome messages.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome off</code><div class="desc">Disable welcome messages (settings kept).</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome reset</code><div class="desc">Wipe all welcome settings entirely.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,welcome</code><div class="desc">View current welcome system status and configured channels.</div><span class="badge a">Admin</span></div>
-</div>
-
-<!-- WLC -->
-<div class="section" id="wlc">
-  <h2>&#x1F389; WLC - Welcome Points</h2>
-  <div class="cmd"><code>,wlc</code><div class="desc">Welcome the last person who joined. Gives YOU (the runner) one point. Only works once per join - shows an error if someone already welcomed them.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc message [text]</code><div class="desc">Set the welcome message. Variables: {welcome.sender}, {welcome.sender.name}, {welcome.receiver}, {welcome.receiver.name}</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc thankyou message [text]</code><div class="desc">Set the points notification (auto-deletes after 5 seconds). Variables: {welcome.receiver}, {welcome.points}</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc points @user</code><div class="desc">View a user's total welcome points.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc points reset @user</code><div class="desc">Reset a user's welcome points to zero.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc leaderboard</code><div class="desc">Top 10 welcomers by points (exempt users hidden).</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,wlc leaderboard exempt @user</code><div class="desc">Toggle a user's leaderboard exemption. Run again to un-exempt.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- BUMP REMINDER -->
-<div class="section" id="bump">
-  <h2>&#x1F4E3; Bump Reminder (Disboard)</h2>
-  <div class="cmd"><code>,bumpreminder channel #channel</code><div class="desc">Set which channel bump reminders and thank-you messages are posted in.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder remind message [text]</code><div class="desc">Set the message sent when it's time to bump again (fires 2 hours after last bump). Use {bumpreminder.last_user_bump} to mention the last bumper.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder thank you [text]</code><div class="desc">Set the message sent immediately after a successful Disboard bump. Use {user.mention}, {bumpreminder.next_bump}.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder autolock on</code><div class="desc">Lock the bump channel after each bump, auto-unlock when the 2-hour reminder fires.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder autolock off</code><div class="desc">Disable auto-lock.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder on</code><div class="desc">Enable the bump reminder system.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder off</code><div class="desc">Disable the bump reminder system (settings saved).</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder reset</code><div class="desc">Reset both remind and thank-you messages to blank.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,bumpreminder check</code><div class="desc">View current config: channel, messages, autolock state, and when the next bump is due.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- VANITY -->
-<div class="section" id="vanity">
-  <h2>&#x2728; Vanity Rewards</h2>
-  <div class="cmd"><code>,vanity set [text]</code><div class="desc">Set the vanity text to watch for in user bios. e.g. ,vanity set .gg/scar — enables the system automatically.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity reward @role1 @role2</code><div class="desc">Set the role(s) awarded to users who have the vanity in their bio.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity message #channel [text]</code><div class="desc">Set the thank-you message channel and content. Variables: {user.mention}, {vanity.reward}</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity thankyou #channel [text]</code><div class="desc">Alias for ,vanity message.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity on</code><div class="desc">Enable the vanity reward system.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity off</code><div class="desc">Disable the vanity reward system.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,vanity</code><div class="desc">View current vanity config.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- AUTORESPONDER -->
-<div class="section" id="ar">
-  <h2>&#x1F916; Autoresponder</h2>
-  <div class="cmd"><code>,ar add [trigger] [response]</code><div class="desc">Add a new autoresponder. Wrap trigger in quotes for spaces: ,ar add "good morning" Good morning! ☀️</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,ar create [trigger] [response]</code><div class="desc">Alias for ,ar add.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,ar remove [trigger]</code><div class="desc">Remove an autoresponder by its trigger word/phrase.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,ar delete [trigger]</code><div class="desc">Alias for ,ar remove.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,ar list</code><div class="desc">View all active autoresponders.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,autoresponder ...</code><div class="desc">Full-name alias for all ,ar commands.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- REACTS -->
-<div class="section" id="reacts">
-  <h2>&#x1F4AC; Message Reacts &amp; Auto Reacts</h2>
-  <div class="cmd"><code>,mr add [trigger] emoji1 emoji2</code><div class="desc">React with emojis whenever any message contains the trigger word.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,mr add @user [trigger] emoji1 emoji2</code><div class="desc">React with emojis only when a specific user's message contains the trigger.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,mr remove [trigger]</code><div class="desc">Remove a global message react by its trigger.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,mr remove @user [trigger]</code><div class="desc">Remove a user-specific message react.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,mr delete ...</code><div class="desc">Alias for ,mr remove.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,mr list</code><div class="desc">View all active message reacts.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,messagereact ...</code><div class="desc">Full-name alias for all ,mr commands.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,autoreact add @user emoji1 emoji2 emoji3</code><div class="desc">React to EVERY message a user sends with these emojis, no trigger needed.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,autoreact remove @user</code><div class="desc">Stop auto-reacting to all of a user's messages.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,autoreact delete @user</code><div class="desc">Alias for ,autoreact remove.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,autoreact list</code><div class="desc">View all active auto reacts.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- EMBED BUILDER -->
-<div class="section" id="embed">
-  <h2>&#x1F3A8; Embed Builder</h2>
-  <div class="cmd"><code>,embed create [name]</code><div class="desc">Create a new named embed. Opens an interactive button-based editor with live preview.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed edit [name]</code><div class="desc">Re-open the interactive editor for an existing embed.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed preview [name]</code><div class="desc">Preview how an embed currently looks.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed list</code><div class="desc">List all saved embed names.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed remove [name]</code><div class="desc">Permanently delete a saved embed.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed colour #RRGGBB</code><div class="desc">Set the default embed colour for this server. e.g. ,embed colour #FF69B4</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,embed color #RRGGBB</code><div class="desc">Alias for ,embed colour.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- LOGGING -->
-<div class="section" id="logging">
-  <h2>&#x1F4CB; Server Logging</h2>
-  <div class="cmd"><code>,log set #channel</code><div class="desc">Set the log channel and enable logging. Logs message edits/deletes, joins/leaves, bans, kicks, timeouts, role changes, nickname changes, and more.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,log off</code><div class="desc">Disable server logging (channel setting is kept).</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- INVITE TRACKER -->
-<div class="section" id="invitetracker">
-  <h2>&#x1F517; Invite Tracker</h2>
-  <div class="cmd"><code>,invitetracker set #channel</code><div class="desc">Set the channel where invite tracking logs are posted (shows who invited each new member).</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,invitetracker off</code><div class="desc">Disable the invite tracker.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,it set #channel</code><div class="desc">Shorthand for ,invitetracker set.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,it off</code><div class="desc">Shorthand for ,invitetracker off.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- ROLES -->
-<div class="section" id="roles">
-  <h2>&#x1F3F7;&#xFE0F; Role Management</h2>
-  <div class="cmd"><code>,role @user [role name / @role / ID]</code><div class="desc">Toggle a role on a member - assigns if they don't have it, removes if they do.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,role create [name]</code><div class="desc">Create a new server role with the given name.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,role icon @role [emoji or image URL]</code><div class="desc">Set an icon for a role. Requires server Level 2 Boost.</div><span class="badge a">Admin</span></div>
-</div>
-
-<!-- SWEAR JAR -->
-<div class="section" id="swearjar">
-  <h2>&#x1FAD9; Swear Jar</h2>
-  <div class="cmd"><code>,swearjar on</code><div class="desc">Enable the swear jar - bot tracks and responds when tracked words are used.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar off</code><div class="desc">Disable the swear jar.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar words add word1,word2,word3</code><div class="desc">Add words to track (comma separated, no spaces between).</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar words remove word1,word2</code><div class="desc">Remove words from tracking.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar words list</code><div class="desc">View all currently tracked words.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar words reset</code><div class="desc">Reset the word list back to built-in defaults.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar message [text]</code><div class="desc">Customize the swear notification message. Variables: {user.mention}, {user.name}, {count}</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar check [@user]</code><div class="desc">Check how many swears someone has. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,swearjar reset @user</code><div class="desc">Reset a user's swear count to zero.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,swearjar leaderboard</code><div class="desc">Top 10 biggest swearers in the server.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,sj ...</code><div class="desc">Shorthand alias for all ,swearjar commands.</div><span class="badge m">Mod</span></div>
-</div>
-
-<!-- UTILITY -->
-<div class="section" id="utility">
-  <h2>&#x1F6E0;&#xFE0F; Utility</h2>
-  <div class="cmd"><code>,avatar [@user]</code><div class="desc">Show a user's avatar. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,av [@user]</code><div class="desc">Shorthand for ,avatar.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,banner [@user]</code><div class="desc">Show a user's profile banner.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,userinfo [@user]</code><div class="desc">Full user info card: username, ID, join date, account age, roles, badges, boost status. Defaults to yourself.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,ui [@user]</code><div class="desc">Shorthand for ,userinfo.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,server icon</code><div class="desc">Show the server's icon as a large image.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,server banner</code><div class="desc">Show the server's banner as a large image.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,afk [reason]</code><div class="desc">Set yourself as AFK with an optional reason. Bot auto-replies when someone mentions you. Cleared automatically when you next send a message.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,time [@user]</code><div class="desc">Check a user's current local time (they must have set their timezone). Defaults to yourself.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,time set [Timezone]</code><div class="desc">Set your timezone using IANA format. e.g. America/New_York, Europe/London, Asia/Tokyo</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,time on</code><div class="desc">Make your timezone visible to others (default state).</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,time off</code><div class="desc">Hide your timezone so others can't check your local time.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,prefix [new prefix]</code><div class="desc">Change the bot's command prefix for this server.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,valid [emoji]</code><div class="desc">Set the bot's success checkmark emoji for this server.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,invalid [emoji]</code><div class="desc">Set the bot's error/fail emoji for this server.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,variables</code><div class="desc">View all user variables like {user.mention}, {user.name}, etc.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables user</code><div class="desc">Show all user-related variables.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables guild</code><div class="desc">Show all server/guild variables.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables server</code><div class="desc">Alias for ,variables guild.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables date</code><div class="desc">Show all date and time variables.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables bump</code><div class="desc">Show bump reminder variables.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,variables helpers</code><div class="desc">Show helper functions like {lower(text)}, {upper(text)}.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,vars ...</code><div class="desc">Shorthand for all ,variables subcommands.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,cmd alias [command] [shortcut]</code><div class="desc">Create a command shortcut. e.g. ,cmd alias ban b — now ,b runs ,ban</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,cmd alias remove [shortcut]</code><div class="desc">Remove a command shortcut.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,cmd alias list</code><div class="desc">View all active command shortcuts for this server.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,livechat on #channel</code><div class="desc">Mirror every message sent in this channel into another channel in real time.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,livechat off</code><div class="desc">Stop mirroring messages from this channel.</div><span class="badge m">Mod</span></div>
-  <div class="cmd"><code>,publish #channel [message]</code><div class="desc">Send a message to another channel as the bot.</div><span class="badge s">Special</span></div>
-  <div class="cmd"><code>,ghost on</code><div class="desc">Enable ghost mode - bot ignores all non-owner commands server-wide.</div><span class="badge s">Special</span></div>
-  <div class="cmd"><code>,ghost off</code><div class="desc">Disable ghost mode.</div><span class="badge s">Special</span></div>
-  <div class="cmd"><code>,setup j2c</code><div class="desc">Auto-create a Join-to-Create voice channel system with a management panel.</div><span class="badge a">Admin</span></div>
-  <div class="cmd"><code>,customize avatar [image URL or attachment]</code><div class="desc">Set a per-server avatar for the bot (unique to each server). Attach an image or provide a URL.</div><span class="badge o">Server Owner</span></div>
-  <div class="cmd"><code>,customize avatar reset</code><div class="desc">Reset the bot's server avatar back to the global default.</div><span class="badge o">Server Owner</span></div>
-  <div class="cmd"><code>,help</code><div class="desc">Shows the bot's help menu.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,bless [@user]</code><div class="desc">Sends a random Bible verse. Optionally bless another user by mentioning them.</div><span class="badge e">Everyone</span></div>
-</div>
-
-<!-- FUN -->
-<div class="section" id="fun">
-  <h2>&#x1F3B2; Fun</h2>
-  <div class="cmd"><code>,coinflip</code><div class="desc">Flip a coin - bot dramatically reveals heads or tails after a short delay.</div><span class="badge e">Everyone</span></div>
-  <div class="cmd"><code>,uwu [text]</code><div class="desc">UwU-ifies the text you provide (replaces r/l with w, adds ny sounds, random face at end).</div><span class="badge e">Everyone</span></div>
-</div>
-
-<!-- OWNER ONLY -->
-<div class="section" id="owner">
-  <h2>&#x1F451; Owner Only</h2>
-  <div class="cmd"><code>,status</code><div class="desc">Bot stats panel: ping, uptime, memory usage, server count, cached users, Node.js version, Discord.js version.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,serverlist</code><div class="desc">Paginated list (5 per page) of every server the bot is in. Shows: name, ID, owner, member count, channel counts, boost tier, and an auto-generated invite link.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,cmd list</code><div class="desc">Full command directory categorised by type.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,cmd checklist</code><div class="desc">Run a diagnostic scan on all registered commands. Shows new, missing, and passing command counts.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,aj whitelist [user ID]</code><div class="desc">Add a user to the global bot owner whitelist.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,aj unwhitelist [user ID]</code><div class="desc">Remove a user from the global owner whitelist.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,aj list</code><div class="desc">View all whitelisted owner users.</div><span class="badge o">Owner</span></div>
-  <div class="cmd"><code>,bot customization list</code><div class="desc">View all per-server bot customizations (avatars, embed colors, etc.) across every server.</div><span class="badge o">Owner</span></div>
-</div>
-
 <script>
-function filter(q){
-  q=q.toLowerCase();
-  document.querySelectorAll('.cmd').forEach(el=>{
-    el.classList.toggle('hidden',q.length>0&&!el.textContent.toLowerCase().includes(q));
+  function toggle(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  function filterCmds(q) {
+    q = q.toLowerCase().trim();
+    document.querySelectorAll('.section').forEach(section => {
+      if (q) section.classList.add('open');
+      const cmds = section.querySelectorAll('.cmd');
+      let any = false;
+      cmds.forEach(cmd => {
+        const show = !q || cmd.textContent.toLowerCase().includes(q);
+        cmd.classList.toggle('hidden', !show);
+        if (show) any = true;
+      });
+      section.style.display = (q && !any) ? 'none' : '';
+    });
+  }
+
+  document.querySelectorAll('.toc a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      target.classList.add('open');
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
+    });
   });
-  document.querySelectorAll('.section').forEach(s=>{
-    const any=[...s.querySelectorAll('.cmd')].some(c=>!c.classList.contains('hidden'));
-    s.style.display=(q.length>0&&!any)?'none':'';
+
+  // scroll-triggered reveal with stagger
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'sectionReveal 0.75s cubic-bezier(0.16,1,0.3,1) both';
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.04, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.section').forEach((s, i) => {
+    s.style.animationDelay = `${i * 0.05}s`;
+    obs.observe(s);
   });
-}
 </script>
 </body>
 </html>
