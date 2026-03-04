@@ -308,7 +308,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <h1 class="cmd-hero-title">Commands</h1>
   <p class="cmd-hero-sub">Explore every command &nbsp;·&nbsp; prefix <strong>,</strong></p>
   <div class="hero-pills">
-    <span class="hero-pill">140+ Commands</span>
+    <span class="hero-pill">143+ Commands</span>
     <span class="hero-pill">19 Categories</span>
   </div>
 </div>
@@ -362,7 +362,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- MODERATION -->
   <div class="section" id="mod">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Moderation <span class="section-count">25 cmds</span></h2>
+      <h2>Moderation <span class="section-count">28 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
@@ -391,6 +391,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,cs</code><div class="desc">Clear all saved snipes for the current channel.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,moderation logs @user</code><div class="desc">View a staff member's full moderation action history (bans, kicks, warns, etc.), paginated.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,moderation reset @user</code><div class="desc">Clear all moderation logs for a specific staff member.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,forcenickname @user [nickname]</code><div class="desc">Permanently force a nickname on a user. If they try to change it, it will automatically snap back.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,forcenickname remove @user</code><div class="desc">Lift the forced nickname from a user, letting them change it freely again.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,forcenickname list</code><div class="desc">View all users currently under a forced nickname in this server.</div><span class="badge m">Mod</span></div>
     </div></div>
   </div>
 
