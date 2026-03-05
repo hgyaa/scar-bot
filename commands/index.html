@@ -106,6 +106,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .s{background:rgba(200,90,255,.07);color:#b060d8;border:1px solid rgba(200,90,255,.13);}
 .e{background:rgba(230,190,70,.06);color:#c8a850;border:1px solid rgba(230,190,70,.11);}
 .hidden{display:none!important;}
+.an{background:rgba(255,60,80,.07);color:#d85068;border:1px solid rgba(255,60,80,.16);}
 
 /* ── VARS PAGE ── */
 #vars-page{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;}
@@ -322,7 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   </div>
 
   <div class="toc">
-    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fun">fun</a><a href="#owner">owner only</a>
+    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fun">fun</a><a href="#owner">owner only</a>
   </div>
 
   <div class="legend">
@@ -331,6 +332,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     <span class="badge m">Mod</span>
     <span class="badge s">Special</span>
     <span class="badge e">Everyone</span>
+    <span class="badge an">AN Admin</span>
     <span class="legend-label">— required permission level</span>
   </div>
 
@@ -411,6 +413,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,filter links on</code><div class="desc">Enable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter links off</code><div class="desc">Disable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter links punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for posting Discord invite links.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
+  <!-- ANTINUKE -->
+  <div class="section" id="antinuke">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>AntiNuke <span class="section-count">20 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,antinuke toggle on/off</code><div class="desc">Enable or disable the entire antinuke system.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,antinuke punishment ban/kick/strip</code><div class="desc">Set what happens to an attacker when antinuke fires. <strong>ban</strong> — permanently bans them. <strong>kick</strong> — kicks them. <strong>strip</strong> — removes all dangerous roles (admin, manage server, ban members, etc.).</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke &lt;module&gt; on/off</code><div class="desc">Toggle an individual module. Replace &lt;module&gt; with: ban, kick, channel, channelcreate, role, rolecreate, webhooks, emoji, guild, integration, botadd, memberprune, or vanity.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke all on/off</code><div class="desc">Toggle every module on or off at once.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke threshold</code><div class="desc">View all current thresholds — how many actions within 10 seconds triggers a punishment. Custom thresholds are marked with ✏️.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke threshold &lt;action&gt; &lt;number&gt;</code><div class="desc">Set how many times an action can happen in 10 seconds before antinuke fires. e.g. <code>,antinuke threshold ban 2</code>. Actions: ban, kick, channel, channelcreate, role, rolecreate, webhooks, emoji, botadd, memberprune.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke log #channel</code><div class="desc">Set a channel to receive antinuke action logs whenever someone is caught and punished.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke log off</code><div class="desc">Remove the antinuke log channel.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke admin @user</code><div class="desc">Grant a user AntiNuke Admin access — they can change all antinuke settings and are automatically whitelisted from punishment. Cannot add/remove other AN admins or run cleanup.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,antinuke unadmin @user</code><div class="desc">Remove someone's AntiNuke Admin access. Also removes their automatic whitelist.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,antinuke trust @user</code><div class="desc">Whitelist a user from antinuke punishment — they will never be punished, but get no settings access. Identical to <code>,antinuke whitelist</code>.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke untrust @user</code><div class="desc">Remove a user from the trust/whitelist.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke whitelist @user</code><div class="desc">Identical alias of <code>,antinuke trust</code> — whitelists a user from punishment only, no settings access.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke unwhitelist @user</code><div class="desc">Identical alias of <code>,antinuke untrust</code>. Cannot be used on AN admins — use <code>,antinuke unadmin</code> first.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke settings</code><div class="desc">Full settings overview — status, punishment, log channel, all thresholds (with ✏️ on custom ones), all modules split into two columns, AN admins, and whitelisted users.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke threshold</code><div class="desc">Dedicated threshold viewer — all actions with their current limits and custom markers.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke trusted</code><div class="desc">List all AN admins and whitelisted/trusted users in separate groups.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke modules</code><div class="desc">List all available modules with what each one protects against.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke list</code><div class="desc">Quick overview: status, punishment, log channel, modules, AN admins, and whitelisted users.</div><span class="badge an">AN Admin</span></div>
+      <div class="cmd"><code>,antinuke cleanup</code><div class="desc">Fully reset all antinuke settings back to defaults. Clears admins, whitelist, custom thresholds, and modules.</div><span class="badge a">Admin</span></div>
     </div></div>
   </div>
 
