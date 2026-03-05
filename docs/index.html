@@ -104,6 +104,7 @@ p.doc-p code{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent
 .b-m{background:rgba(90,220,130,.07);color:#60c080;border:1px solid rgba(90,220,130,.13);}
 .b-a{background:rgba(90,160,255,.07);color:#6898d8;border:1px solid rgba(90,160,255,.13);}
 .b-o{background:rgba(255,90,90,.07);color:#d86060;border:1px solid rgba(255,90,90,.13);}
+.b-an{background:rgba(255,60,80,.07);color:#d85068;border:1px solid rgba(255,60,80,.16);}
 
 /* CATEGORY GRID */
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;}
@@ -159,19 +160,71 @@ p.doc-p code{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent
       Quick Start
     </a>
 
-    <span class="sidebar-section-label">Features</span>
+    <span class="sidebar-section-label">Moderation</span>
     <a class="sidebar-link" onclick="showPage('moderation')" href="#">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 1l1.5 4.5H13L9.5 8l1.5 4.5L7 10l-4 2.5L4.5 8 1 5.5h4.5z"/></svg>
       Moderation
+    </a>
+    <a class="sidebar-link" onclick="showPage('antinuke')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 1l5 3v4c0 2.5-2 4.5-5 5-3-0.5-5-2.5-5-5V4z"/></svg>
+      AntiNuke
+    </a>
+    <a class="sidebar-link" onclick="showPage('filter')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 3h12M3 7h8M5 11h4"/></svg>
+      Word & Link Filter
+    </a>
+    <a class="sidebar-link" onclick="showPage('jail')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="1" width="10" height="12" rx="1"/><path d="M5 1v12M9 1v12"/></svg>
+      Jail System
+    </a>
+    <a class="sidebar-link" onclick="showPage('logging')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 2h10v10H2zM2 5h10M5 5v7"/></svg>
+      Logging
+    </a>
+
+    <span class="sidebar-section-label">Features</span>
+    <a class="sidebar-link" onclick="showPage('welcome')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+      Auto Welcomer
+    </a>
+    <a class="sidebar-link" onclick="showPage('wlc')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 1l1.5 4.5H13L9.5 8l1.5 4.5L7 10l-4 2.5L4.5 8 1 5.5h4.5z"/></svg>
+      WLC Points
     </a>
     <a class="sidebar-link" onclick="showPage('economy')" href="#">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M7 4v6M5 5.5h3a1 1 0 010 2H6a1 1 0 000 2h3"/></svg>
       Economy
     </a>
-    <a class="sidebar-link" onclick="showPage('welcome')" href="#">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
-      Auto Welcomer
+    <a class="sidebar-link" onclick="showPage('autoresponder')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 2h10v7H8l-2 3-2-3H2z"/></svg>
+      Autoresponder
     </a>
+    <a class="sidebar-link" onclick="showPage('vanity')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 1l1 3h3l-2.5 2 1 3L7 7.5 4.5 9l1-3L3 4h3z"/></svg>
+      Vanity Rewards
+    </a>
+    <a class="sidebar-link" onclick="showPage('bump')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M7 4v3l2 2"/></svg>
+      Bump Reminder
+    </a>
+    <a class="sidebar-link" onclick="showPage('invitetracker')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2H3a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V9M9 2h3v3M12 2L7 7"/></svg>
+      Invite Tracker
+    </a>
+    <a class="sidebar-link" onclick="showPage('embed')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="12" height="8" rx="1"/><path d="M4 6h6M4 8.5h4"/></svg>
+      Embed Builder
+    </a>
+    <a class="sidebar-link" onclick="showPage('swearjar')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 2h4l1 8H4zM3 6h8"/></svg>
+      Swear Jar
+    </a>
+    <a class="sidebar-link" onclick="showPage('roles')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="5" r="3"/><path d="M1 13c0-3 8-3 8 0"/><path d="M11 6l2 2-2 2"/></svg>
+      Role Management
+    </a>
+
+    <span class="sidebar-section-label">Config</span>
     <a class="sidebar-link" onclick="showPage('permissions')" href="#">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="10" height="7" rx="1"/><path d="M4 6V4a3 3 0 016 0v2"/></svg>
       Permissions
@@ -428,6 +481,291 @@ p.doc-p code{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent
           <li><code>{lower(text)}</code> — Convert to lowercase</li>
           <li><code>{upper(text)}</code> — Convert to uppercase</li>
         </ul>
+      </div>
+    </div>
+
+
+    <!-- QUICKSTART PAGE -->
+    <div class="doc-page" id="page-quickstart">
+      <div class="breadcrumb">Get Started <span>› Quick Start</span></div>
+      <h1 class="page-title">Quick Start</h1>
+      <p class="page-tagline">Get scar running in your server in under 2 minutes</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">1. Invite the Bot</h2>
+        <p class="doc-p">Click <strong>Add to Discord</strong> in the nav and authorise scar with the required permissions. The bot needs <strong>Administrator</strong> or specific permissions (Manage Roles, Ban Members, Kick Members, Manage Channels) to function correctly.</p>
+        <div class="callout callout-warn">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-text"><strong>Important:</strong> Make sure the scar bot role is placed <strong>above</strong> any roles you want it to be able to manage, assign, or remove.</div>
+        </div>
+        <h2 class="doc-h2">2. Set Your Prefix</h2>
+        <p class="doc-p">The default prefix is <code>,</code> (comma). You can change it at any time:</p>
+        <div class="cmd-block"><code>,prefix [new prefix]</code><div style="flex:1"><div class="cmd-block-desc">Change the bot's command prefix for this server. e.g. <code>,prefix !</code></div></div><span class="badge b-a">Admin</span></div>
+        <p class="doc-p">If you forget your prefix, just mention the bot — <code>@scar</code> — and it will tell you.</p>
+        <h2 class="doc-h2">3. Grant Staff Permissions</h2>
+        <p class="doc-p">By default only the server owner has full access. Grant your staff bot-level permissions:</p>
+        <div class="cmd-block"><code>,mod let @user</code><div style="flex:1"><div class="cmd-block-desc">Give a user Mod-level access (warn, kick, timeout, lock channels, etc.)</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,admin let @user</code><div style="flex:1"><div class="cmd-block-desc">Give a user Admin-level access (ban, clear, full mod suite).</div></div><span class="badge b-a">Admin</span></div>
+        <h2 class="doc-h2">4. Explore Features</h2>
+        <p class="doc-p">Browse the sidebar to configure individual features. A few popular starting points:</p>
+        <ul class="doc-list">
+          <li>Set up <strong>Auto Welcomer</strong> to greet new members</li>
+          <li>Enable <strong>AntiNuke</strong> to protect against raids</li>
+          <li>Configure <strong>Word Filter</strong> to auto-delete banned words</li>
+          <li>Set up <strong>Logging</strong> to track server activity</li>
+          <li>Run <code>,help</code> in Discord to see the full command list</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ANTINUKE PAGE -->
+    <div class="doc-page" id="page-antinuke">
+      <div class="breadcrumb">Moderation <span>› AntiNuke</span></div>
+      <h1 class="page-title">AntiNuke</h1>
+      <p class="page-tagline">Real-time raid protection that detects and punishes attackers automatically</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">How It Works</h2>
+        <p class="doc-p">AntiNuke monitors your server's audit log in real time. When someone performs a destructive action (mass bans, channel deletes, role deletes, etc.) above a configurable threshold within a 10-second window, scar automatically punishes them before they can do more damage.</p>
+        <div class="callout">
+          <span class="callout-icon">🛡️</span>
+          <div class="callout-text"><strong>Enable it first:</strong> Run <code>,antinuke toggle on</code> — nothing is active until you do.</div>
+        </div>
+        <h2 class="doc-h2">Permission Tiers</h2>
+        <ul class="doc-list">
+          <li><strong>Server Admin / Bot Owner</strong> — Full access. Can add/remove AN admins, reset settings, everything.</li>
+          <li><strong>AntiNuke Admin</strong> — Can change all settings (modules, thresholds, punishment, log). Automatically bypass punishment. Cannot add other AN admins or run cleanup.</li>
+          <li><strong>Trusted / Whitelisted</strong> — Exempt from punishment only. Zero settings access. <code>,trust</code> and <code>,whitelist</code> are identical aliases for this tier.</li>
+        </ul>
+        <h2 class="doc-h2">Toggle & Punishment</h2>
+        <div class="cmd-block"><code>,antinuke toggle on/off</code><div style="flex:1"><div class="cmd-block-desc">Enable or disable the entire antinuke system.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,antinuke punishment ban/kick/strip</code><div style="flex:1"><div class="cmd-block-desc"><strong>ban</strong> — permanently bans the attacker. <strong>kick</strong> — kicks them. <strong>strip</strong> — removes all dangerous roles (admin, ban members, manage server, etc.).</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke log #channel</code><div style="flex:1"><div class="cmd-block-desc">Set a channel to receive logs whenever antinuke triggers and punishes someone.</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke log off</code><div style="flex:1"><div class="cmd-block-desc">Remove the log channel.</div></div><span class="badge b-an">AN Admin</span></div>
+        <h2 class="doc-h2">Modules</h2>
+        <p class="doc-p">Each protection type is a toggleable module. All are <strong>on by default</strong> once you enable antinuke.</p>
+        <div class="cmd-block"><code>,antinuke &lt;module&gt; on/off</code><div style="flex:1"><div class="cmd-block-desc">Toggle a single module. Modules: <code>ban</code> <code>kick</code> <code>channel</code> <code>channelcreate</code> <code>role</code> <code>rolecreate</code> <code>webhooks</code> <code>emoji</code> <code>guild</code> <code>integration</code> <code>botadd</code> <code>memberprune</code> <code>vanity</code></div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke all on/off</code><div style="flex:1"><div class="cmd-block-desc">Toggle every module on or off at once.</div></div><span class="badge b-an">AN Admin</span></div>
+        <h2 class="doc-h2">Thresholds</h2>
+        <p class="doc-p">Thresholds control how many times an action can happen within <strong>10 seconds</strong> before antinuke fires. Defaults are conservative — lower them for stricter protection.</p>
+        <div class="cmd-block"><code>,antinuke threshold</code><div style="flex:1"><div class="cmd-block-desc">View all current thresholds. Custom values are marked with ✏️.</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke threshold &lt;action&gt; &lt;number&gt;</code><div style="flex:1"><div class="cmd-block-desc">Set a specific threshold. e.g. <code>,antinuke threshold ban 2</code> — punish after 2 bans in 10s. Valid actions: ban, kick, channel, channelcreate, role, rolecreate, webhooks, emoji, botadd, memberprune.</div></div><span class="badge b-an">AN Admin</span></div>
+        <h2 class="doc-h2">Default Thresholds</h2>
+        <ul class="doc-list">
+          <li><strong>Ban / Kick / Channel Delete / Role Delete</strong> — 3 actions in 10s</li>
+          <li><strong>Channel Create / Role Create / Emoji Delete</strong> — 5 actions in 10s</li>
+          <li><strong>Webhooks</strong> — 3 in 10s</li>
+          <li><strong>Bot Add / Member Prune</strong> — 1 (triggers instantly)</li>
+        </ul>
+        <h2 class="doc-h2">Managing Admins & Whitelist</h2>
+        <div class="cmd-block"><code>,antinuke admin @user</code><div style="flex:1"><div class="cmd-block-desc">Grant AntiNuke Admin access — they can change settings and are automatically whitelisted from punishment.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,antinuke unadmin @user</code><div style="flex:1"><div class="cmd-block-desc">Remove AN Admin access (also removes their auto-whitelist).</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,antinuke trust @user</code><div style="flex:1"><div class="cmd-block-desc">Whitelist a user from punishment only — no settings access. Identical to <code>,antinuke whitelist @user</code>.</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke untrust @user</code><div style="flex:1"><div class="cmd-block-desc">Remove from whitelist. Identical to <code>,antinuke unwhitelist @user</code>.</div></div><span class="badge b-an">AN Admin</span></div>
+        <h2 class="doc-h2">Viewing & Resetting</h2>
+        <div class="cmd-block"><code>,antinuke settings</code><div style="flex:1"><div class="cmd-block-desc">Full overview — status, punishment, log channel, all thresholds, modules, AN admins, and whitelisted users.</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke trusted</code><div style="flex:1"><div class="cmd-block-desc">List all AN admins and whitelisted users in separate groups.</div></div><span class="badge b-an">AN Admin</span></div>
+        <div class="cmd-block"><code>,antinuke cleanup</code><div style="flex:1"><div class="cmd-block-desc">Fully reset all antinuke settings to defaults. Clears admins, whitelist, custom thresholds, and modules.</div></div><span class="badge b-a">Admin</span></div>
+      </div>
+    </div>
+
+    <!-- FILTER PAGE -->
+    <div class="doc-page" id="page-filter">
+      <div class="breadcrumb">Moderation <span>› Word & Link Filter</span></div>
+      <h1 class="page-title">Word & Link Filter</h1>
+      <p class="page-tagline">Auto-delete messages containing banned words or Discord invite links</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Word Filter</h2>
+        <div class="cmd-block"><code>,filter add word1 word2 word3</code><div style="flex:1"><div class="cmd-block-desc">Add words to the filter (space-separated). Messages containing these will be auto-deleted.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,filter remove word1 word2</code><div style="flex:1"><div class="cmd-block-desc">Remove words from the filter.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,filter list</code><div style="flex:1"><div class="cmd-block-desc">View all filtered words, paginated with navigation buttons.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,filter punishment [ban/kick/timeout/none] [duration]</code><div style="flex:1"><div class="cmd-block-desc">Set the punishment for sending filtered words. Duration only applies to timeout — e.g. <code>,filter punishment timeout 10m</code>.</div></div><span class="badge b-m">Mod</span></div>
+        <h2 class="doc-h2">Invite Link Filter</h2>
+        <div class="cmd-block"><code>,filter links on</code><div style="flex:1"><div class="cmd-block-desc">Enable auto-deletion of Discord invite links.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,filter links off</code><div style="flex:1"><div class="cmd-block-desc">Disable invite link filtering.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,filter links punishment [ban/kick/timeout/none] [duration]</code><div style="flex:1"><div class="cmd-block-desc">Set the punishment for posting Discord invite links.</div></div><span class="badge b-m">Mod</span></div>
+      </div>
+    </div>
+
+    <!-- JAIL PAGE -->
+    <div class="doc-page" id="page-jail">
+      <div class="breadcrumb">Moderation <span>› Jail System</span></div>
+      <h1 class="page-title">Jail System</h1>
+      <p class="page-tagline">Strip a member's roles and confine them to a dedicated jail channel</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Setup</h2>
+        <div class="cmd-block"><code>,setup jail</code><div style="flex:1"><div class="cmd-block-desc">Auto-creates the jail role and jail channel. Run this once before using jail commands.</div></div><span class="badge b-a">Admin</span></div>
+        <h2 class="doc-h2">Commands</h2>
+        <div class="cmd-block"><code>,jail @user [reason]</code><div style="flex:1"><div class="cmd-block-desc">Jail a user — strips all their roles, applies the jail role, and notifies them in the jail channel.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,unjail @user [reason]</code><div style="flex:1"><div class="cmd-block-desc">Release a jailed user and restore all their previous roles automatically.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <div class="callout-text">Roles are stored when a user is jailed and fully restored when unjailed — even if they had many roles.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGGING PAGE -->
+    <div class="doc-page" id="page-logging">
+      <div class="breadcrumb">Moderation <span>› Logging</span></div>
+      <h1 class="page-title">Logging</h1>
+      <p class="page-tagline">Log server activity and moderation events to a dedicated channel</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Setup</h2>
+        <div class="cmd-block"><code>,log set #channel</code><div style="flex:1"><div class="cmd-block-desc">Set the channel where all server logs will be sent.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,log off</code><div style="flex:1"><div class="cmd-block-desc">Disable server logging.</div></div><span class="badge b-a">Admin</span></div>
+        <h2 class="doc-h2">What Gets Logged</h2>
+        <ul class="doc-list">
+          <li><strong>Messages:</strong> Deleted and edited messages</li>
+          <li><strong>Members:</strong> Joins, leaves, nickname changes, role changes</li>
+          <li><strong>Channels:</strong> Created, deleted, renamed</li>
+          <li><strong>Roles:</strong> Created, deleted, updated</li>
+          <li><strong>Moderation:</strong> Bans, kicks, timeouts, unbans</li>
+          <li><strong>Voice:</strong> Voice channel joins, leaves, moves</li>
+          <li><strong>Server:</strong> Name, icon, and settings changes</li>
+        </ul>
+        <h2 class="doc-h2">Moderation Action Logs</h2>
+        <div class="cmd-block"><code>,moderation logs @user</code><div style="flex:1"><div class="cmd-block-desc">View a staff member's full moderation history (bans, kicks, warns they issued), paginated.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,moderation reset @user</code><div style="flex:1"><div class="cmd-block-desc">Clear all moderation logs for a specific staff member.</div></div><span class="badge b-a">Admin</span></div>
+      </div>
+    </div>
+
+    <!-- WLC PAGE -->
+    <div class="doc-page" id="page-wlc">
+      <div class="breadcrumb">Features <span>› WLC Points</span></div>
+      <h1 class="page-title">WLC Points</h1>
+      <p class="page-tagline">Reward members for welcoming new joiners with a points leaderboard</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">How It Works</h2>
+        <p class="doc-p">When a new member joins, the first person to run <code>,wlc</code> welcomes them and earns a welcome point. Each new joiner can only be welcomed once. Points accumulate on a leaderboard.</p>
+        <div class="cmd-block"><code>,wlc</code><div style="flex:1"><div class="cmd-block-desc">Welcome the last person who joined the server. Earns you 1 welcome point.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,wlc points @user</code><div style="flex:1"><div class="cmd-block-desc">View how many welcome points a user has earned.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,wlc leaderboard</code><div style="flex:1"><div class="cmd-block-desc">View the top 10 welcomers in the server.</div></div><span class="badge b-e">Everyone</span></div>
+        <h2 class="doc-h2">Configuration</h2>
+        <div class="cmd-block"><code>,wlc message [text]</code><div style="flex:1"><div class="cmd-block-desc">Customize the message sent when someone runs <code>,wlc</code>. Variables: <code>{welcome.sender}</code>, <code>{welcome.receiver}</code>.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,wlc thankyou message [text]</code><div style="flex:1"><div class="cmd-block-desc">Customize the points notification message (auto-deletes after 5s). Variables: <code>{welcome.receiver}</code>, <code>{welcome.points}</code>.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,wlc points reset @user</code><div style="flex:1"><div class="cmd-block-desc">Reset a user's welcome point total to zero.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,wlc leaderboard exempt @user</code><div style="flex:1"><div class="cmd-block-desc">Toggle a user's exemption from the welcome leaderboard. Run again to un-exempt.</div></div><span class="badge b-m">Mod</span></div>
+      </div>
+    </div>
+
+    <!-- AUTORESPONDER PAGE -->
+    <div class="doc-page" id="page-autoresponder">
+      <div class="breadcrumb">Features <span>› Autoresponder</span></div>
+      <h1 class="page-title">Autoresponder</h1>
+      <p class="page-tagline">Automatically reply when a specific keyword or phrase is detected</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Commands</h2>
+        <div class="cmd-block"><code>,ar add [trigger] | [response]</code><div style="flex:1"><div class="cmd-block-desc">Add an autoresponder. Use <code>|</code> to separate the trigger from the response. e.g. <code>,ar add hello | Hey there {user.mention}!</code></div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,ar remove [trigger]</code><div style="flex:1"><div class="cmd-block-desc">Remove an autoresponder by its trigger phrase.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,ar list</code><div style="flex:1"><div class="cmd-block-desc">View all configured autoresponders for the server.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,autoresponder ...</code><div style="flex:1"><div class="cmd-block-desc">Full alias — same as all <code>,ar</code> commands.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <div class="callout-text">Autoresponder messages support variables like <code>{user.mention}</code>, <code>{user.name}</code>, <code>{guild.name}</code> and more. See the Variables page for the full list.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VANITY PAGE -->
+    <div class="doc-page" id="page-vanity">
+      <div class="breadcrumb">Features <span>› Vanity Rewards</span></div>
+      <h1 class="page-title">Vanity Rewards</h1>
+      <p class="page-tagline">Automatically reward members who put your vanity URL in their bio</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">How It Works</h2>
+        <p class="doc-p">When a member updates their bio or status, scar checks if it contains your vanity text. If it does, they automatically receive the configured reward roles. Remove it, and the roles are removed.</p>
+        <h2 class="doc-h2">Setup</h2>
+        <div class="cmd-block"><code>,vanity set [text]</code><div style="flex:1"><div class="cmd-block-desc">Set the vanity text to look for in member bios. e.g. <code>,vanity set .gg/scar</code>. Also enables the system.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,vanity reward @role</code><div style="flex:1"><div class="cmd-block-desc">Set the role(s) to give members who have your vanity in their bio. Mention one or more roles.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,vanity message #channel [text]</code><div style="flex:1"><div class="cmd-block-desc">Set a thank-you message sent when someone claims the vanity reward. Variables: <code>{user.mention}</code>, <code>{server.name}</code>, <code>{vanity.reward}</code>.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,vanity on / off</code><div style="flex:1"><div class="cmd-block-desc">Enable or disable the vanity system without clearing your settings.</div></div><span class="badge b-m">Mod</span></div>
+      </div>
+    </div>
+
+    <!-- BUMP REMINDER PAGE -->
+    <div class="doc-page" id="page-bump">
+      <div class="breadcrumb">Features <span>› Bump Reminder</span></div>
+      <h1 class="page-title">Bump Reminder</h1>
+      <p class="page-tagline">Automatically remind your server when it's time to bump on Disboard</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">How It Works</h2>
+        <p class="doc-p">After a member bumps your server on Disboard using <code>/bump</code>, scar detects it and schedules a reminder for 2 hours later. The reminder pings a configured role or channel so no bump is ever missed.</p>
+        <h2 class="doc-h2">Setup</h2>
+        <div class="cmd-block"><code>,bumpreminder set #channel</code><div style="flex:1"><div class="cmd-block-desc">Set the channel where bump reminders will be sent.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,bumpreminder role @role</code><div style="flex:1"><div class="cmd-block-desc">Set a role to be pinged when the bump reminder fires.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,bumpreminder message [text]</code><div style="flex:1"><div class="cmd-block-desc">Customize the reminder message. Supports variables like <code>{guild.name}</code>.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,bumpreminder on / off</code><div style="flex:1"><div class="cmd-block-desc">Enable or disable bump reminders.</div></div><span class="badge b-a">Admin</span></div>
+      </div>
+    </div>
+
+    <!-- INVITE TRACKER PAGE -->
+    <div class="doc-page" id="page-invitetracker">
+      <div class="breadcrumb">Features <span>› Invite Tracker</span></div>
+      <h1 class="page-title">Invite Tracker</h1>
+      <p class="page-tagline">Track who invited each member and see invite leaderboards</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Commands</h2>
+        <div class="cmd-block"><code>,invitetracker check @user</code><div style="flex:1"><div class="cmd-block-desc">See how many members a user has invited and who invited them.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,invitetracker leaderboard</code><div style="flex:1"><div class="cmd-block-desc">Top 10 inviters in the server by invite count.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,invitetracker reset @user</code><div style="flex:1"><div class="cmd-block-desc">Reset a user's invite count.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,it ...</code><div style="flex:1"><div class="cmd-block-desc">Shorthand alias for all <code>,invitetracker</code> commands.</div></div><span class="badge b-m">Mod</span></div>
+      </div>
+    </div>
+
+    <!-- EMBED BUILDER PAGE -->
+    <div class="doc-page" id="page-embed">
+      <div class="breadcrumb">Features <span>› Embed Builder</span></div>
+      <h1 class="page-title">Embed Builder</h1>
+      <p class="page-tagline">Create, save, and send rich Discord embeds with an interactive builder</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Creating Embeds</h2>
+        <div class="cmd-block"><code>,embed create [name]</code><div style="flex:1"><div class="cmd-block-desc">Start building a new embed with an interactive button menu. Give it a name to save it for later.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,embed send [name] #channel</code><div style="flex:1"><div class="cmd-block-desc">Send a saved embed to a specific channel.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,embed edit [name]</code><div style="flex:1"><div class="cmd-block-desc">Re-open the interactive editor for a saved embed.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,embed delete [name]</code><div style="flex:1"><div class="cmd-block-desc">Delete a saved embed.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,embed list</code><div style="flex:1"><div class="cmd-block-desc">View all saved embeds for this server.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <div class="callout-text">The embed builder uses Discord's interactive buttons — you can set the title, description, color, footer, thumbnail, image, and fields all from the menu without any complex syntax.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWEAR JAR PAGE -->
+    <div class="doc-page" id="page-swearjar">
+      <div class="breadcrumb">Features <span>› Swear Jar</span></div>
+      <h1 class="page-title">Swear Jar</h1>
+      <p class="page-tagline">Track swear word usage with a leaderboard and custom responses</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Toggle</h2>
+        <div class="cmd-block"><code>,swearjar on / off</code><div style="flex:1"><div class="cmd-block-desc">Enable or disable the swear jar.</div></div><span class="badge b-m">Mod</span></div>
+        <h2 class="doc-h2">Managing Words</h2>
+        <div class="cmd-block"><code>,swearjar words add word1,word2,word3</code><div style="flex:1"><div class="cmd-block-desc">Add words to track (comma-separated, no spaces between).</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,swearjar words remove word1,word2</code><div style="flex:1"><div class="cmd-block-desc">Remove words from tracking.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,swearjar words list</code><div style="flex:1"><div class="cmd-block-desc">View all currently tracked words.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,swearjar words reset</code><div style="flex:1"><div class="cmd-block-desc">Reset the word list back to built-in defaults.</div></div><span class="badge b-m">Mod</span></div>
+        <h2 class="doc-h2">Stats & Leaderboard</h2>
+        <div class="cmd-block"><code>,swearjar check [@user]</code><div style="flex:1"><div class="cmd-block-desc">Check how many swears someone has. Defaults to yourself.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,swearjar leaderboard</code><div style="flex:1"><div class="cmd-block-desc">Top 10 biggest swearers in the server.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,swearjar reset @user</code><div style="flex:1"><div class="cmd-block-desc">Reset a user's swear count to zero.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,swearjar message [text]</code><div style="flex:1"><div class="cmd-block-desc">Customize the swear notification message. Variables: <code>{user.mention}</code>, <code>{user.name}</code>, <code>{count}</code>.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,sj ...</code><div style="flex:1"><div class="cmd-block-desc">Shorthand alias for all <code>,swearjar</code> commands.</div></div><span class="badge b-m">Mod</span></div>
+      </div>
+    </div>
+
+    <!-- ROLE MANAGEMENT PAGE -->
+    <div class="doc-page" id="page-roles">
+      <div class="breadcrumb">Features <span>› Role Management</span></div>
+      <h1 class="page-title">Role Management</h1>
+      <p class="page-tagline">Assign, remove, create roles and set role icons</p>
+      <div class="doc-section">
+        <h2 class="doc-h2">Commands</h2>
+        <div class="cmd-block"><code>,role @user [role name/@role/ID]</code><div style="flex:1"><div class="cmd-block-desc">Toggle a role on a member — adds it if they don't have it, removes it if they do.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,role create [name]</code><div style="flex:1"><div class="cmd-block-desc">Create a new role with the given name.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="cmd-block"><code>,role icon @role [emoji/URL]</code><div style="flex:1"><div class="cmd-block-desc">Set a role icon using an emoji or image URL. Requires the server to have Level 2 Boosts.</div></div><span class="badge b-a">Admin</span></div>
+        <div class="callout callout-warn">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-text">scar's role must be positioned <strong>above</strong> any role it needs to assign or remove in your server's role list.</div>
+        </div>
       </div>
     </div>
 
