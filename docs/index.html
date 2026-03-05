@@ -224,6 +224,11 @@ p.doc-p code{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent
       Role Management
     </a>
 
+    <a class="sidebar-link" onclick="showPage('fm')" href="#">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="10" r="2"/><circle cx="3" cy="12" r="2"/><path d="M11 10V4l-8 2v8"/></svg>
+      Last.fm
+    </a>
+
     <span class="sidebar-section-label">Config</span>
     <a class="sidebar-link" onclick="showPage('permissions')" href="#">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="10" height="7" rx="1"/><path d="M4 6V4a3 3 0 016 0v2"/></svg>
@@ -766,6 +771,63 @@ p.doc-p code{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent
           <span class="callout-icon">⚠️</span>
           <div class="callout-text">scar's role must be positioned <strong>above</strong> any role it needs to assign or remove in your server's role list.</div>
         </div>
+      </div>
+    </div>
+
+
+    <!-- LAST.FM PAGE -->
+    <div class="doc-page" id="page-fm">
+      <div class="breadcrumb">Features <span>› Last.fm</span></div>
+      <h1 class="page-title">Last.fm</h1>
+      <p class="page-tagline">Show what you're listening to, view music stats, and explore your top artists, tracks and albums</p>
+
+      <div class="doc-section">
+        <h2 class="doc-h2">Getting Started</h2>
+        <p class="doc-p">
+          scar integrates with <strong>Last.fm</strong> to let members share their music. Last.fm tracks every song you listen to on Spotify (or any connected app) as a <strong>scrobble</strong>. Once you link your account, you can show your now playing, top artists, top tracks, and more.
+        </p>
+        <div class="callout">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-text">You'll need a free Last.fm account. Connect it to Spotify at <strong>last.fm/settings/applications</strong> so your listens get tracked automatically.</div>
+        </div>
+
+        <h3 class="doc-h3">Linking your account</h3>
+        <div class="cmd-block"><code>,fm set &lt;username&gt;</code><div style="flex:1"><div class="cmd-block-desc">Link your Last.fm account instantly. You can change it up to <strong>3 times per hour</strong>.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,fm unlink</code><div style="flex:1"><div class="cmd-block-desc">Unlink your Last.fm account from this server.</div></div><span class="badge b-e">Everyone</span></div>
+      </div>
+
+      <div class="doc-section">
+        <h2 class="doc-h2">Now Playing</h2>
+        <p class="doc-p">The default <code>,fm</code> command shows what you're currently playing — or the last track you listened to. Displays the track name, artist, album art, and your total scrobble count.</p>
+        <div class="cmd-block"><code>,fm</code><div style="flex:1"><div class="cmd-block-desc">Show your currently playing or last played track with album art and scrobble count.</div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,fm @user</code><div style="flex:1"><div class="cmd-block-desc">Check what someone else is listening to. They must have a Last.fm account linked.</div></div><span class="badge b-e">Everyone</span></div>
+      </div>
+
+      <div class="doc-section">
+        <h2 class="doc-h2">Stats & History</h2>
+        <div class="cmd-block"><code>,fm profile</code><div style="flex:1"><div class="cmd-block-desc">Full profile overview — total scrobbles, account age, top 3 artists, and now playing. Aliases: <code>,fm p</code>, <code>,fm stats</code></div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,fm recent</code><div style="flex:1"><div class="cmd-block-desc">Your last 10 scrobbled tracks, with the currently playing track highlighted. Alias: <code>,fm r</code></div></div><span class="badge b-e">Everyone</span></div>
+      </div>
+
+      <div class="doc-section">
+        <h2 class="doc-h2">Top Charts</h2>
+        <p class="doc-p">All top chart commands support a <strong>time period</strong> as an optional second argument. If no period is given, it defaults to <strong>overall</strong> (all time).</p>
+
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <div class="callout-text">Available periods: <strong>7day</strong> · <strong>1month</strong> · <strong>3month</strong> · <strong>6month</strong> · <strong>12month</strong> · <strong>overall</strong><br>Example: <code>,fm ta 7day</code> — your top artists from the last 7 days.</div>
+        </div>
+
+        <div class="cmd-block"><code>,fm topartists [period]</code><div style="flex:1"><div class="cmd-block-desc">Your top 10 most listened artists with play counts and thumbnail art. Aliases: <code>,fm ta</code>, <code>,fm artists</code></div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,fm toptracks [period]</code><div style="flex:1"><div class="cmd-block-desc">Your top 10 most played tracks with play counts. Aliases: <code>,fm tt</code>, <code>,fm tracks</code></div></div><span class="badge b-e">Everyone</span></div>
+        <div class="cmd-block"><code>,fm topalbums [period]</code><div style="flex:1"><div class="cmd-block-desc">Your top 10 most played albums with art. Aliases: <code>,fm tal</code>, <code>,fm albums</code></div></div><span class="badge b-e">Everyone</span></div>
+      </div>
+
+      <div class="doc-section">
+        <h2 class="doc-h2">Moderation</h2>
+        <p class="doc-p">If someone abuses the fm system by linking fake accounts or misusing commands, mods can permanently block them.</p>
+        <div class="cmd-block"><code>,fm blacklist @user</code><div style="flex:1"><div class="cmd-block-desc">Permanently block a user from using any fm commands and unlinks their account.</div></div><span class="badge b-m">Mod</span></div>
+        <div class="cmd-block"><code>,fm unblacklist @user</code><div style="flex:1"><div class="cmd-block-desc">Remove a user from the fm blacklist so they can link an account again.</div></div><span class="badge b-m">Mod</span></div>
       </div>
     </div>
 
