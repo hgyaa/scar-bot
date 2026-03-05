@@ -309,8 +309,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <h1 class="cmd-hero-title">Commands</h1>
   <p class="cmd-hero-sub">Explore every command &nbsp;·&nbsp; prefix <strong>,</strong></p>
   <div class="hero-pills">
-    <span class="hero-pill">143+ Commands</span>
-    <span class="hero-pill">19 Categories</span>
+    <span class="hero-pill">153+ Commands</span>
+    <span class="hero-pill">20 Categories</span>
   </div>
 </div>
 
@@ -323,7 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   </div>
 
   <div class="toc">
-    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fun">fun</a><a href="#owner">owner only</a>
+    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fm">last.fm</a><a href="#fun">fun</a><a href="#owner">owner only</a>
   </div>
 
   <div class="legend">
@@ -708,6 +708,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,customize avatar reset</code><div class="desc">Reset the bot's server avatar back to the global default.</div><span class="badge o">Server Owner</span></div>
       <div class="cmd"><code>,help</code><div class="desc">Shows the bot's help menu.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,bless [@user]</code><div class="desc">Sends a random Bible verse. Optionally bless another user by mentioning them.</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+
+  <!-- LAST.FM -->
+  <div class="section" id="fm">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Last.fm <span class="section-count">11 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,fm</code><div class="desc">Show what you're currently playing on Spotify via Last.fm. Displays track, artist, album art, and total scrobbles.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm @user</code><div class="desc">Check what another user is currently playing (they must have a Last.fm account linked).</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm set &lt;username&gt;</code><div class="desc">Link your Last.fm account. You can change it up to 3 times per hour.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm unlink</code><div class="desc">Unlink your Last.fm account.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm profile</code><div class="desc">View your full Last.fm profile — total scrobbles, account age, top artists, and now playing. Also works with ,fm p and ,fm stats.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm recent</code><div class="desc">Show your last 10 scrobbled tracks. Alias: ,fm r</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm topartists [period]</code><div class="desc">Your top 10 most listened artists with play counts and album art. Alias: ,fm ta — Period: 7day, 1month, 3month, 6month, 12month, overall (default).</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm toptracks [period]</code><div class="desc">Your top 10 most played tracks. Alias: ,fm tt — Same period options as topartists.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm topalbums [period]</code><div class="desc">Your top 10 most played albums with art. Alias: ,fm tal — Same period options as topartists.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,fm blacklist @user</code><div class="desc">Permanently block a user from using the fm system and unlinks their account.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,fm unblacklist @user</code><div class="desc">Remove a user from the fm blacklist so they can link again.</div><span class="badge m">Mod</span></div>
     </div></div>
   </div>
 
