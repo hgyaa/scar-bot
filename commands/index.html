@@ -312,7 +312,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <p class="cmd-hero-sub">Explore every command &nbsp;·&nbsp; prefix <strong>,</strong></p>
   <div class="hero-pills">
     <span class="hero-pill">153+ Commands</span>
-    <span class="hero-pill">20 Categories</span>
+    <span class="hero-pill">22 Categories</span>
   </div>
 </div>
 
@@ -325,7 +325,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   </div>
 
   <div class="toc">
-    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fm">last.fm</a><a href="#fun">fun</a><a href="#owner">owner only</a>
+    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fm">last.fm</a><a href="#fun">fun</a><a href="#emoji">emoji &amp; sticker</a><a href="#roleplay">roleplay</a><a href="#owner">owner only</a>
   </div>
 
   <div class="legend">
@@ -744,6 +744,41 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     <div class="section-body"><div class="section-body-inner">
       <div class="cmd"><code>,coinflip</code><div class="desc">Flip a coin — bot dramatically reveals heads or tails after a short delay.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,uwu [text]</code><div class="desc">UwU-ifies the text you provide (replaces r/l with w, adds ny sounds, random face at end).</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+  <!-- EMOJI -->
+  <div class="section" id="emoji">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Emoji &amp; Sticker <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,emoji add &lt;emoji1&gt; &lt;emoji2&gt; ...</code><div class="desc">Add up to 10 custom emojis to the server at once by pasting Discord emoji syntax e.g. <code>:cool:</code> from another server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,emoji mass add</code><div class="desc">Add up to 10 emojis from image attachments. The filename is used as the emoji name automatically.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,emoji steal [name]</code><div class="desc">Steal the last custom emoji used in the channel (scans last 30 messages). Optionally rename it with [name].</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,sticker add [name] [description]</code><div class="desc">Add a sticker from an attached image (PNG or APNG). Name defaults to the filename if not provided.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,sticker mass add</code><div class="desc">Add up to 5 stickers from multiple image attachments at once.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,sticker steal</code><div class="desc">Steal the last sticker sent in the channel (scans last 30 messages) and add it to this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,emoji</code><div class="desc">View the emoji command help menu.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- ROLEPLAY -->
+  <div class="section" id="roleplay">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Roleplay <span class="section-count">8 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,roleplay on</code><div class="desc">Enable the roleplay slash command system for this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,roleplay off</code><div class="desc">Disable the roleplay slash commands for this server.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>/hug @user</code><div class="desc">Send a hug GIF to another member. 5-second cooldown per user.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>/kiss @user</code><div class="desc">Send a kiss GIF to another member.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>/cuddle @user</code><div class="desc">Send a cuddle GIF to another member.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>/punch @user</code><div class="desc">Send a punch GIF at another member.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>/boop @user</code><div class="desc">Boop another member's nose with a GIF.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>/kill @user</code><div class="desc">Dramatically eliminate another member with a GIF.</div><span class="badge e">Everyone</span></div>
     </div></div>
   </div>
 
