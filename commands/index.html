@@ -325,7 +325,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   </div>
 
   <div class="toc">
-    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#utility">utility</a><a href="#fm">last.fm</a><a href="#fun">fun</a><a href="#emoji">emoji &amp; sticker</a><a href="#roleplay">roleplay</a><a href="#owner">owner only</a>
+    <a href="#perms">permissions</a><a href="#mod">moderation</a><a href="#filter">filter</a><a href="#antinuke">antinuke</a><a href="#jail">jail</a><a href="#economy">economy</a><a href="#welcome">auto welcome</a><a href="#wlc">wlc points</a><a href="#bump">bump reminder</a><a href="#vanity">vanity</a><a href="#ar">autoresponder</a><a href="#reacts">reacts</a><a href="#embed">embed builder</a><a href="#logging">logging</a><a href="#invitetracker">invite tracker</a><a href="#roles">roles</a><a href="#swearjar">swear jar</a><a href="#ghostping">ghost ping</a><a href="#utility">utility</a><a href="#fm">last.fm</a><a href="#fun">fun</a><a href="#imagetools">image tools</a><a href="#car">car info</a><a href="#tiktok">tiktok live</a><a href="#automod">automod setup</a><a href="#emoji">emoji &amp; sticker</a><a href="#roleplay">roleplay</a><a href="#owner">owner only</a>
   </div>
 
   <div class="legend">
@@ -366,7 +366,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- MODERATION -->
   <div class="section" id="mod">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Moderation <span class="section-count">28 cmds</span></h2>
+      <h2>Moderation <span class="section-count">29 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
@@ -398,6 +398,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,forcenickname @user [nickname]</code><div class="desc">Permanently force a nickname on a user. If they try to change it, it will automatically snap back.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,forcenickname remove @user</code><div class="desc">Lift the forced nickname from a user, letting them change it freely again.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,forcenickname list</code><div class="desc">View all users currently under a forced nickname in this server.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,massban @user1 @user2 ...</code><div class="desc">Ban multiple users at once by providing mentions or raw user IDs. Shows a live count of successful bans and any failures.</div><span class="badge o">Owner</span></div>
     </div></div>
   </div>
 
@@ -667,10 +668,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     </div></div>
   </div>
 
+  <!-- GHOST PING -->
+  <div class="section" id="ghostping">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Ghost Ping Detection <span class="section-count">6 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,ghostping set #channel</code><div class="desc">Add a channel to ghost ping monitoring. When someone deletes a message that contained a @mention, the bot exposes it. Max 10 channels.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ghostping remove #channel</code><div class="desc">Remove a channel from ghost ping monitoring.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ghostping on #channel</code><div class="desc">Re-enable ghost ping detection in a specific channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ghostping off #channel</code><div class="desc">Temporarily disable ghost ping detection in a specific channel without removing it.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ghostping list</code><div class="desc">View all configured ghost ping channels and their enabled/disabled status.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,ghostping reset</code><div class="desc">Remove all ghost ping channels at once.</div><span class="badge m">Mod</span></div>
+    </div></div>
+  </div>
+
   <!-- UTILITY -->
   <div class="section" id="utility">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Utility <span class="section-count">35 cmds</span></h2>
+      <h2>Utility <span class="section-count">40 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
@@ -681,6 +698,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,ui [@user]</code><div class="desc">Shorthand for ,userinfo.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,server icon</code><div class="desc">Show the server's icon as a large image.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,server banner</code><div class="desc">Show the server's banner as a large image.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,serverinfo</code><div class="desc">Full server info card: creation date, member count, boost level, channel counts, role and emoji count, boost count, vanity URL, and link buttons for icon, splash, banner, and server invite.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,si</code><div class="desc">Shorthand for ,serverinfo.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,membercount</code><div class="desc">Live member breakdown: total, humans, bots, and an online/idle/DND/offline status split.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,mc</code><div class="desc">Shorthand for ,membercount.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,weather [location]</code><div class="desc">Current weather for any city, region, or country. Shows temperature (C and F), feels like, today's high/low, humidity, wind speed and direction, visibility, and UV index.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,afk [reason]</code><div class="desc">Set yourself as AFK with an optional reason. Bot auto-replies when someone mentions you. Cleared automatically when you next send a message.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,time [@user]</code><div class="desc">Check a user's current local time (they must have set their timezone). Defaults to yourself.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,time set [Timezone]</code><div class="desc">Set your timezone using IANA format. e.g. America/New_York, Europe/London, Asia/Tokyo</div><span class="badge e">Everyone</span></div>
@@ -747,6 +769,58 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     </div></div>
   </div>
 
+  <!-- IMAGE TOOLS -->
+  <div class="section" id="imagetools">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Image Tools <span class="section-count">3 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,gif [image / URL / message link]</code><div class="desc">Convert an image to a GIF. Attach an image, provide a direct URL, a Discord message link, or reply to a message containing an image.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,caption [text] [image / URL / reply]</code><div class="desc">Add a caption to an image. Attach an image, provide a URL, or reply to a message with an image. The text becomes a white caption bar overlaid on the image.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,quote</code><div class="desc">Reply to any text message to generate a stylised quote image with the author's avatar. A font selector lets you pick between Serif, Sans-serif, Monospace, Italic, and Bold Italic styles.</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+  <!-- CAR INFO -->
+  <div class="section" id="car">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>Car Info <span class="section-count">1 cmd</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,car [make / model / chassis code]</code><div class="desc">Look up specs for any car in the database. Shows body style, engine, horsepower, torque, transmission, drivetrain, 0–60, top speed, MSRP, and a fun fact. Works with nicknames and chassis codes, e.g. <code>,car r34</code>, <code>,car supra</code>, <code>,car mustang gt500</code>.</div><span class="badge e">Everyone</span></div>
+    </div></div>
+  </div>
+
+  <!-- TIKTOK LIVE -->
+  <div class="section" id="tiktok">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>TikTok Live <span class="section-count">7 cmds</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,tiktok live set @user &lt;tiktok_username&gt;</code><div class="desc">Link a Discord member to their TikTok account. The bot will post a notification when they go live.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live remove @user</code><div class="desc">Unlink a Discord member's TikTok account and stop monitoring them.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live channel #channel</code><div class="desc">Set which channel receives TikTok Live notifications.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live message [text]</code><div class="desc">Customise the live notification message. Variables: <code>{streamer}</code>, <code>{tiktok_username}</code>, <code>{tiktok_url}</code>.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live list</code><div class="desc">View all linked TikTok accounts, the notification channel, current message, and live/offline status for each account.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live reset</code><div class="desc">Wipe all TikTok Live settings — accounts, channel, and message.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,tiktok live</code><div class="desc">View the TikTok Live help menu with all subcommand usage.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
+  <!-- AUTOMOD SETUP -->
+  <div class="section" id="automod">
+    <div class="section-header" onclick="toggle(this)">
+      <h2>AutoMod Setup <span class="section-count">1 cmd</span></h2>
+      <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
+    </div>
+    <div class="section-body"><div class="section-body-inner">
+      <div class="cmd"><code>,automodsetup</code><div class="desc">Automatically creates 10 pre-configured Discord AutoMod rules covering severe slurs, spam patterns, mass mentions, excessive caps, and more. Useful for quickly reaching the 100-rule badge. Requires Manage Server permission.</div><span class="badge a">Admin</span></div>
+    </div></div>
+  </div>
+
   <!-- EMOJI -->
   <div class="section" id="emoji">
     <div class="section-header" onclick="toggle(this)">
@@ -785,7 +859,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- OWNER ONLY -->
   <div class="section" id="owner">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Owner Only <span class="section-count">8 cmds</span></h2>
+      <h2>Owner Only <span class="section-count">11 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
@@ -797,6 +871,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,aj unwhitelist [user ID]</code><div class="desc">Remove a user from the global owner whitelist.</div><span class="badge o">Owner</span></div>
       <div class="cmd"><code>,aj list</code><div class="desc">View all whitelisted owner users.</div><span class="badge o">Owner</span></div>
       <div class="cmd"><code>,bot customization list</code><div class="desc">View all per-server bot customizations (avatars, embed colors, etc.) across every server.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,botleave [server ID]</code><div class="desc">Force the bot to leave any server by its ID.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,botstatus [type] [text]</code><div class="desc">Change the bot's activity status. Types: <code>playing</code>, <code>watching</code>, <code>listening</code>, <code>streaming</code>, <code>competing</code>, <code>custom</code>. Use <code>,botstatus reset</code> to restore the default. Setting persists across restarts.</div><span class="badge o">Owner</span></div>
+      <div class="cmd"><code>,massban @user1 @user2 ...</code><div class="desc">Ban multiple users at once across the current server using mentions or raw user IDs.</div><span class="badge o">Owner</span></div>
     </div></div>
   </div>
 
