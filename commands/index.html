@@ -142,7 +142,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-discord{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.25);color:#7289da;text-decoration:none;transition:all .25s;flex-shrink:0;}
 .nav-discord:hover{background:rgba(88,101,242,0.25);border-color:rgba(88,101,242,0.5);color:#fff;box-shadow:0 0 16px rgba(88,101,242,0.2);}
 </style>
-<style>*{-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important;}</style><style>*{-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important;}</style></head>
+</head>
 <body>
 <canvas id="stars-canvas"></canvas>
 
@@ -366,7 +366,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- MODERATION -->
   <div class="section" id="mod">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Moderation <span class="section-count">33 cmds</span></h2>
+      <h2>Moderation <span class="section-count">34 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
@@ -414,7 +414,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
-      <div class="cmd"><code>,filter add word1, phrase two, word3</code><div class="desc">Add words or phrases to the auto-delete filter (comma separated). Append <code>--strict</code> to any entry to match only as a whole word e.g. <code>,filter add cat --strict</code>.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter add word1, phrase two --strict</code><div class="desc">Add words or phrases to the auto-delete filter (comma separated). Append <code>--strict</code> to match only as a whole word.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter remove word1, phrase two</code><div class="desc">Remove words or phrases from the filter (comma separated).</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter list</code><div class="desc">View all filtered words, paginated with navigation buttons.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for sending filtered words. Duration only applies to timeout, e.g. ,filter punishment timeout 10m</div><span class="badge m">Mod</span></div>
@@ -422,18 +422,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <div class="cmd"><code>,filter links off</code><div class="desc">Disable auto-deletion of Discord invite links.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter links punishment [ban/kick/timeout/none] [duration]</code><div class="desc">Set the punishment for posting Discord invite links.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter reset</code><div class="desc">Wipe all filtered words and reset all filter settings to default.</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,filter emoji [threshold]</code><div class="desc">Enable the smart emoji filter. Delete messages with more than [threshold] emojis. e.g. <code>,filter emoji 5</code>.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter emoji [threshold]</code><div class="desc">Enable the smart emoji filter — deletes messages with more than [threshold] emojis. e.g. <code>,filter emoji 5</code>.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter emoji off</code><div class="desc">Disable the emoji smart filter.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,filter spam [threshold]</code><div class="desc">Enable the smart spam filter. Delete messages if a user sends more than [threshold] messages in 10 seconds.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter spam [threshold]</code><div class="desc">Enable the smart spam filter — deletes if a user sends more than [threshold] messages in 10 seconds.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter spam off</code><div class="desc">Disable the spam smart filter.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,filter image [threshold]</code><div class="desc">Enable the smart image filter. Delete messages if a user posts more than [threshold] images in 30 seconds.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter image [threshold]</code><div class="desc">Enable the smart image filter — deletes if a user posts more than [threshold] images in 30 seconds.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter image off</code><div class="desc">Disable the image smart filter.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,filter mention [threshold]</code><div class="desc">Enable the smart mention filter. Delete messages containing more than [threshold] pings (including repeated pings of the same user).</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter mention [threshold]</code><div class="desc">Enable the smart mention filter — deletes messages with more than [threshold] pings, including repeated pings of the same user.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter mention off</code><div class="desc">Disable the mention smart filter.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,filter [emoji/spam/image/mention] offence [strike#] [action] [duration]</code><div class="desc">Set a punishment rule for a strike number on any smart filter. Actions: <code>warn</code>, <code>timeout</code>, <code>mute</code>, <code>kick</code>, <code>ban</code>. e.g. <code>,filter spam offence 2 timeout 10m</code>.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter [type] offence [strike#] [action] [duration]</code><div class="desc">Set a punishment rule for a strike number. Actions: <code>warn</code>, <code>timeout</code>, <code>mute</code>, <code>kick</code>, <code>ban</code>. e.g. <code>,filter spam offence 2 timeout 10m</code>.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter [type] offence remove [strike#]</code><div class="desc">Remove a specific strike rule from a smart filter.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter [type] offences</code><div class="desc">List all configured strike rules for a smart filter type.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,filter logchannel #channel</code><div class="desc">Set a channel where all smart filter violations are logged with details.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,filter logchannel #channel</code><div class="desc">Set a channel where all smart filter violations are logged.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter logchannel off</code><div class="desc">Disable smart filter logging.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,filter bypass add @role</code><div class="desc">Allow a role to bypass all smart filters entirely.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,filter bypass remove @role</code><div class="desc">Remove a role from the smart filter bypass list.</div><span class="badge a">Admin</span></div>
@@ -761,12 +761,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- IMAGE MUTE -->
   <div class="section" id="imute">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Image Mute <span class="section-count">5 cmds</span></h2>
+      <h2>Image Mute <span class="section-count">4 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
-      <div class="cmd"><code>,setup imute</code><div class="desc">Create the Image Muted role and automatically deny Attach Files and Embed Links in every channel. Re-run to resync if channels were added later.</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,imute @user [reason]</code><div class="desc">Give a user the Image Muted role, preventing them from posting attachments or embeds in any channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,setup imute</code><div class="desc">Create the Image Muted role and deny Attach Files + Embed Links in every channel. Re-run to resync after adding new channels.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,imute @user [reason]</code><div class="desc">Give a user the Image Muted role, preventing them from posting attachments or embeds.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,iunmute @user</code><div class="desc">Remove the Image Muted role from a user, restoring their ability to post images.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,destroy imute</code><div class="desc">Delete the Image Muted role and remove all channel permission overwrites tied to it.</div><span class="badge a">Admin</span></div>
     </div></div>
@@ -779,13 +779,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
-      <div class="cmd"><code>,nword on</code><div class="desc">Enable the n-word counter — bot tracks soft-r and hard-r usage separately.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,nword on</code><div class="desc">Enable the n-word counter — tracks soft-r and hard-r usage separately.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,nword off</code><div class="desc">Disable the n-word counter.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,nword check [@user]</code><div class="desc">Check how many times a user has said it (total and hard-r split). Defaults to yourself.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,nword leaderboard</code><div class="desc">Top 10 users by total count in this server.</div><span class="badge e">Everyone</span></div>
       <div class="cmd"><code>,nword hardr</code><div class="desc">Top 10 users by hard-r count specifically.</div><span class="badge e">Everyone</span></div>
-      <div class="cmd"><code>,nword message soft [text]</code><div class="desc">Customise the message shown for soft-r usage. Variables: <code>{user}</code>, <code>{count}</code>, <code>{s}</code>.</div><span class="badge m">Mod</span></div>
-      <div class="cmd"><code>,nword message hardr [text]</code><div class="desc">Customise the message shown for hard-r usage. Variables: <code>{user}</code>, <code>{count}</code>, <code>{s}</code>.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,nword message soft [text]</code><div class="desc">Customise the soft-r notification message. Variables: <code>{user}</code>, <code>{count}</code>, <code>{s}</code>.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,nword message hardr [text]</code><div class="desc">Customise the hard-r notification message. Variables: <code>{user}</code>, <code>{count}</code>, <code>{s}</code>.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,nword reset @user</code><div class="desc">Reset all n-word counts for a specific user.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,nword reset all</code><div class="desc">Wipe every user's n-word counts in this server.</div><span class="badge m">Mod</span></div>
     </div></div>
@@ -798,7 +798,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
-      <div class="cmd"><code>,tts connect</code><div class="desc">Connect the bot to the voice channel linked to the current text channel (run inside a VC's built-in text chat, or join a VC first). Bot will read out any message sent in that text channel.</div><span class="badge m">Mod</span></div>
+      <div class="cmd"><code>,tts connect</code><div class="desc">Connect the bot to the voice channel linked to the current text channel. Run inside a VC's built-in text chat, or join a VC first.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,tts disconnect</code><div class="desc">Disconnect the bot from the voice channel and end the TTS session.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,tts voice [language]</code><div class="desc">Change the TTS voice/language. e.g. <code>,tts voice en</code>, <code>,tts voice fr</code>, <code>,tts voice es</code>.</div><span class="badge m">Mod</span></div>
       <div class="cmd"><code>,tts skip</code><div class="desc">Skip the currently playing TTS message.</div><span class="badge m">Mod</span></div>
@@ -808,12 +808,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
   <!-- MESSAGES -->
   <div class="section" id="messages">
     <div class="section-header" onclick="toggle(this)">
-      <h2>Message Counter <span class="section-count">3 cmds</span></h2>
+      <h2>Message Counter <span class="section-count">2 cmds</span></h2>
       <svg class="chevron" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5l5 5 5-5"/></svg>
     </div>
     <div class="section-body"><div class="section-body-inner">
-      <div class="cmd"><code>,messages [@user]</code><div class="desc">Check how many messages a user has sent in this server. Defaults to yourself. Count is tracked live as messages are sent.</div><span class="badge e">Everyone</span></div>
-      <div class="cmd"><code>,messages sync</code><div class="desc">Scan all channel history and backfill message counts for every user. Useful on first setup. May take a while on large servers.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,messages [@user]</code><div class="desc">Check how many messages a user has sent in this server. Defaults to yourself. Tracked live as messages are sent.</div><span class="badge e">Everyone</span></div>
+      <div class="cmd"><code>,messages sync</code><div class="desc">Scan all channel history and backfill message counts. Useful on first setup — may take a while on large servers.</div><span class="badge a">Admin</span></div>
     </div></div>
   </div>
 
@@ -825,15 +825,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
     </div>
     <div class="section-body"><div class="section-body-inner">
       <div class="cmd"><code>,starboard channel #channel</code><div class="desc">Set the channel where starred messages are posted.</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,starboard threshold [number]</code><div class="desc">Set how many reactions a message needs before it gets posted to the starboard.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,starboard threshold [number]</code><div class="desc">Set how many reactions a message needs to appear on the starboard.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,starboard emoji [emoji]</code><div class="desc">Set which emoji triggers the starboard. Defaults to ⭐.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,starboard on</code><div class="desc">Enable the starboard system.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,starboard off</code><div class="desc">Disable the starboard system (settings kept).</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,starboard ignore #channel</code><div class="desc">Exclude a channel from the starboard — reactions in that channel won't count.</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,starboard unignore #channel</code><div class="desc">Remove a channel from the starboard ignore list.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,starboard ignore #channel</code><div class="desc">Exclude a channel from the starboard — reactions there won't count.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,starboard unignore #channel</code><div class="desc">Remove a channel from the ignore list.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,starboard ignored</code><div class="desc">View all channels currently excluded from the starboard.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,starboard reset</code><div class="desc">Wipe all starboard settings and entries.</div><span class="badge a">Admin</span></div>
-      <div class="cmd"><code>,starboard status</code><div class="desc">View current starboard config: channel, emoji, threshold, and ignored channels.</div><span class="badge a">Admin</span></div>
+      <div class="cmd"><code>,starboard status</code><div class="desc">View current config: channel, emoji, threshold, and ignored channels.</div><span class="badge a">Admin</span></div>
       <div class="cmd"><code>,sb ...</code><div class="desc">Shorthand alias for all ,starboard commands.</div><span class="badge a">Admin</span></div>
     </div></div>
   </div>
@@ -985,75 +985,54 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 </div>
 
 <script>
-
-document.addEventListener('\x63\x6f\x6e\x74\x65\x78\x74\x6d\x65\x6e\x75',function(e){e.preventDefault();return false;});
-document.addEventListener('\x6b\x65\x79\x64\x6f\x77\x6e',function(e){
-  if(e.ctrlKey&&(e.key==='\x75'||e.key==='\x73'||e.key==='\x61'||e.key==='\x63')){e.preventDefault();return false;}
-  if(e.key==='\x46\x31\x32'||e.key==='\x46\x35'){e.preventDefault();return false;}
-});
-document.addEventListener('\x73\x65\x6c\x65\x63\x74\x73\x74\x61\x72\x74',function(e){e.preventDefault();return false;});
-
-(function(){
-var _threshold=160;
-var _blocked=false;
-var _deny=function(){
-if(_blocked)return;
-_blocked=true;
-document.documentElement.innerHTML="\x3c\x5f\x4f\x31\x6c\x30\x3e\x3c\x62\x6f\x64\x79\x20\x73\x74\x79\x6c\x65\x3d\x22\x6d\x61\x72\x67\x69\x6e\x3a\x30\x3b\x64\x69\x73\x70\x6c\x61\x79\x3a\x66\x6c\x65\x78\x3b\x5f\x6c\x30\x30\x4f\x6c\x4f\x2d\x5f\x49\x31\x6c\x31\x49\x49\x49\x3a\x5f\x4f\x31\x30\x49\x49\x31\x3b\x5f\x6c\x30\x49\x49\x30\x2d\x5f\x30\x30\x31\x4f\x4f\x31\x49\x3a\x5f\x4f\x31\x30\x49\x49\x31\x3b\x68\x65\x69\x67\x68\x74\x3a\x31\x30\x30\x76\x68\x3b\x62\x61\x63\x6b\x67\x72\x6f\x75\x6e\x64\x3a\x23\x30\x61\x30\x61\x31\x34\x3b\x63\x6f\x6c\x6f\x72\x3a\x23\x5f\x6c\x4f\x4f\x31\x49\x3b\x66\x6f\x6e\x74\x2d\x5f\x4f\x4f\x31\x4f\x31\x6c\x30\x3a\x31\x2e\x35\x72\x65\x6d\x3b\x66\x6f\x6e\x74\x2d\x5f\x6c\x4f\x4f\x49\x6c\x30\x30\x3a\x5f\x6c\x30\x4f\x49\x2d\x5f\x31\x6c\x49\x4f\x4f\x22\x3e\x5f\x31\x30\x30\x30\x49\x49\x20\x5f\x4f\x31\x49\x31\x30\x49\x3c\x2f\x62\x6f\x64\x79\x3e\x3c\x2f\x5f\x4f\x31\x6c\x30\x3e";
-};
-setInterval(function(){
-var _w=window.outerWidth-window.innerWidth>_threshold;
-var _h=window.outerHeight-window.innerHeight>_threshold;
-if(_w||_h){_deny();}
-},600);
-})();
-document.addEventListener("\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x30\x4f\x49\x31\x30\x31\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x31\x30\x4f\x31\x6c\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x6c\x49\x31\x49",function(e){e.preventDefault();return false;});
-document.addEventListener("\x5c\x5f\x6c\x30\x30\x6c\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x6c\x30\x49\x30\x49\x5c\x5f\x30\x30\x6c\x30\x49\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x6c\x4f\x31\x6c\x4f\x5c\x5f\x4f\x30\x31\x31\x30\x6c",function(e){
-if(e.ctrlKey&&(e.key==="\x5c\x5f\x6c\x49\x31\x49"||e.key==="\x5c\x5f\x30\x30\x31\x31"||e.key==="\x5c\x5f\x30\x49\x6c\x6c"||e.key==="\x5c\x5f\x31\x4f\x4f\x31")){e.preventDefault();return false;}
-if(e.key==="\x5c\x5f\x49\x4f\x31\x49\x30\x4f\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x49\x49\x49\x49\x4f\x4f"||e.key==="\x5c\x5f\x49\x4f\x31\x49\x30\x4f\x31\x5c\x5f\x31\x6c\x31\x49\x6c"){e.preventDefault();return false;}
-});
-document.addEventListener("\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x30\x49\x6c\x6c\x5c\x5f\x30\x6c\x30\x4f\x6c\x30\x5c\x5f\x49\x6c\x31\x4f\x49",function(e){e.preventDefault();return false;});
-function toggle(h){h.parentElement.classList.toggle("\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c");}
+function toggle(h){h.parentElement.classList.toggle('open');}
 function filterCmds(q){
-q=q.toLowerCase().trim();
-document.querySelectorAll("\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x49\x4f\x4f\x30\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c").forEach(s=>{
-if(q)s.classList.add("\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c");
-const _OI0Il1=s.querySelectorAll("\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x31\x30\x4f\x31\x6c\x5c\x5f\x30\x30\x6c\x30\x49");let _Ol0llI=false;
-_OI0Il1.forEach(c=>{const _00II1lI=!q||c.textContent.toLowerCase().includes(q);c.classList.toggle("\x5c\x5f\x6c\x4f\x6c\x31\x5c\x5f\x49\x4f\x4f\x30\x5c\x5f\x30\x30\x6c\x30\x49\x5c\x5f\x30\x30\x6c\x30\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c",!_00II1lI);if(_00II1lI)_Ol0llI=true;});
-s.style.display=(q&&!_Ol0llI)?"\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c":"";
-});
+  q=q.toLowerCase().trim();
+  document.querySelectorAll('.section').forEach(s=>{
+    if(q)s.classList.add('open');
+    const cmds=s.querySelectorAll('.cmd');let any=false;
+    cmds.forEach(c=>{const show=!q||c.textContent.toLowerCase().includes(q);c.classList.toggle('hidden',!show);if(show)any=true;});
+    s.style.display=(q&&!any)?'none':'';
+  });
 }
-document.querySelectorAll("\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x30\x49\x6c\x6c").forEach(a=>{
-a.addEventListener("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x49\x30\x49",e=>{
-e.preventDefault();
-const t=document.querySelector(a.getAttribute("\x5c\x5f\x6c\x4f\x6c\x31\x5c\x5f\x30\x6c\x30\x4f\x6c\x30\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x6c\x31\x6c\x49\x6c\x31"));
-if(!t)return;
-t.classList.add("\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c");
-setTimeout(()=>t._OIOOl0I({_0IOO:"\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31",block:"\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30"}),30);
+document.querySelectorAll('.toc a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(!t)return;
+    t.classList.add('open');
+    setTimeout(()=>t.scrollIntoView({behavior:'smooth',block:'start'}),30);
+  });
 });
-});
-const _1I0O=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e._100IO){e.target.style.animation="\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x49\x4f\x4f\x30\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x6c\x30\x4f\x49\x4f\x4f\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x6c\x4f\x49\x31\x6c\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x30\x49\x6c\x6c\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x6c\x6c\x31\x49\x49\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x6c\x30\x6c\x6c\x49\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x30\x30\x49\x31\x49\x4f\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x49\x31\x6c\x30\x5c\x5f\x31\x4f\x30\x4f\x30\x4f\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x4f\x30\x4f\x30\x4f\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x30\x30\x31\x49\x5c\x5f\x31\x4f\x30\x4f\x30\x4f\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x49\x49\x31\x6c\x31\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x49\x31\x30\x30\x6c";_1I0O.unobserve(e.target);}}
-);
-},{_11I1l:.04,_I111011:"\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x30\x4f\x49\x31\x30\x31\x31\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x30\x4f\x49\x31\x30\x31\x31\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x6c\x30\x6c\x6c\x49\x5c\x5f\x49\x49\x49\x49\x4f\x4f\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x30\x4f\x49\x31\x30\x31\x31\x5c\x5f\x49\x31\x49\x49\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x4f\x49\x6c\x49\x31\x49\x5c\x5f\x30\x4f\x49\x31\x30\x31\x31"});
-function _10l10O(){
-document.getElementById("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x6c\x30\x6c\x6c\x49\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30").classList.add("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x31\x49\x30\x49");
-document.body.style.overflow="\x5c\x5f\x6c\x4f\x6c\x31\x5c\x5f\x49\x4f\x4f\x30\x5c\x5f\x30\x30\x6c\x30\x49\x5c\x5f\x30\x30\x6c\x30\x49\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c";
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.animation='sectionReveal .7s cubic-bezier(0.16,1,0.3,1) both';obs.unobserve(e.target);}}
+  );
+},{threshold:.04,rootMargin:'0px 0px -20px 0px'});
+function openVarsPage(){
+  document.getElementById('vars-page').classList.add('active');
+  document.body.style.overflow='hidden';
 }
-function _O10O0(){
-document.getElementById("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x6c\x30\x6c\x6c\x49\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x4f\x4f\x4f\x6c\x30").classList.remove("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x31\x4f\x31\x49\x4f\x6c\x31\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x31\x49\x30\x49");
-document.body.style.overflow="";
+function closeVarsPage(){
+  document.getElementById('vars-page').classList.remove('active');
+  document.body.style.overflow='';
 }
-document.querySelectorAll("\x5c\x5f\x31\x6c\x4f\x31\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x4f\x4f\x6c\x31\x6c\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x49\x4f\x4f\x30\x5c\x5f\x6c\x6c\x31\x31\x4f\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c").forEach((s,i)=>{s.style._0l0I=i*.05+"\x5c\x5f\x30\x30\x31\x31";_1I0O.observe(s);});
+document.querySelectorAll('.section').forEach((s,i)=>{s.style.animationDelay=i*.05+'s';obs.observe(s);});
 (function(){
-const canvas=document.getElementById("\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x49\x6c\x31\x4f\x49\x5c\x5f\x30\x49\x6c\x6c\x5c\x5f\x30\x6c\x30\x4f\x6c\x30\x5c\x5f\x30\x30\x31\x31\x5c\x5f\x6c\x30\x6c\x6c\x49\x5c\x5f\x31\x4f\x4f\x31\x5c\x5f\x30\x49\x6c\x6c\x5c\x5f\x4f\x30\x31\x31\x30\x6c\x5c\x5f\x6c\x4f\x49\x31\x6c\x5c\x5f\x30\x49\x6c\x6c\x5c\x5f\x30\x30\x31\x31");
-const ctx=canvas.getContext("\x5c\x5f\x49\x49\x49\x49\x4f\x4f\x5c\x5f\x30\x30\x6c\x30\x49");let stars=[];
-function _10l10l(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-function _OIOIll(){stars=[];for(let i=0;i<180;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.1+.2,_O0I0:Math.random()*.5+.12,_0I0ll:Math.random()*.4+.05,_OllI:Math.random()*Math.PI*2});}
-let _I00111=0;
-function _10OO0(){ctx.clearRect(0,0,canvas.width,canvas.height);_I00111++;stars.forEach(s=>{const p=s._O0I0+Math.sin(_I00111*s._0I0ll*.04+s._OllI)*.18;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`_IO0OO(210,190,240,${Math.max(.04,Math.min(.85,p))})`;ctx.fill();});requestAnimationFrame(_10OO0);}
-window.addEventListener("\x5c\x5f\x30\x31\x31\x4f\x30\x31\x6c\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x49\x31\x30\x30\x6c\x5c\x5f\x30\x30\x4f\x30\x49\x5c\x5f\x31\x49\x30\x49\x5c\x5f\x49\x31\x30\x30\x6c",()=>{_10l10l();_OIOIll();});
-_10l10l();_OIOIll();_10OO0();
-})();</script>
+  const canvas=document.getElementById('stars-canvas');
+  const ctx=canvas.getContext('2d');let stars=[];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  function init(){stars=[];for(let i=0;i<180;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.1+.2,alpha:Math.random()*.5+.12,speed:Math.random()*.4+.05,phase:Math.random()*Math.PI*2});}
+  let frame=0;
+  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);frame++;stars.forEach(s=>{const p=s.alpha+Math.sin(frame*s.speed*.04+s.phase)*.18;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,190,240,${Math.max(.04,Math.min(.85,p))})`;ctx.fill();});requestAnimationFrame(draw);}
+  window.addEventListener('resize',()=>{resize();init();});
+  resize();init();draw();
+})();
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='u'||e.key==='s'||e.key==='a'||e.key==='c')){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
+</script>
 </body>
 </html>
