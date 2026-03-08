@@ -416,6 +416,12 @@ document.querySelectorAll('.reveal').forEach((el,i)=>{
   el.style.transitionDelay=`${(i%4)*.08}s`;
   obs.observe(el);
 });
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='u'||e.key==='s'||e.key==='a'||e.key==='c')){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
 </script>
 </body>
 </html>
