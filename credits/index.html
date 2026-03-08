@@ -413,4 +413,10 @@ footer{border-top:1px solid var(--border);padding:22px 80px;display:flex;align-i
   }
   setTimeout(shoot,800);
 })();
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey&&(e.key==='u'||e.key==='s'||e.key==='a'||e.key==='c')){e.preventDefault();return false;}
+  if(e.key==='F12'){e.preventDefault();return false;}
+});
 </script>
