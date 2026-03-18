@@ -18,9 +18,9 @@
   --accent2: #b91c2e;
   --accent-glow: rgba(185,28,46,0.15);
   --accent-pale: rgba(255,255,255,0.04);
-  --text: #d4d4d4;
-  --muted: #5a5a5a;
-  --dim: #303030;
+  --text: #d8d8d8;
+  --muted: #8c8c8c;
+  --dim: #606060;
   --expo: cubic-bezier(0.16,1,0.3,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -1351,34 +1351,34 @@ document.addEventListener('keydown',function(e){
 
 // ── PARTICLE TRAIL ──
 (function(){
-  const SHAPES=['▪','▫','◆','◇','×','·','▸'];
-  const COLS=['rgba(185,28,46,.9)','rgba(255,255,255,.5)','rgba(185,28,46,.5)','rgba(200,200,200,.3)'];
+  const SHAPES=['▪','▫','◆','◇','×','·','▸','◈','◉','▹','◦'];
+  const COLS=['rgba(185,28,46,.95)','rgba(255,255,255,.6)','rgba(185,28,46,.6)','rgba(220,220,220,.45)','rgba(140,10,24,.8)','rgba(255,180,180,.35)'];
   let last=0;
   document.addEventListener('mousemove',e=>{
     const now=Date.now();
-    if(now-last<45)return;last=now;
-    // main shard
-    const p=document.createElement('span');
-    const sz=8+Math.random()*12,col=COLS[Math.floor(Math.random()*COLS.length)];
-    p.textContent=SHAPES[Math.floor(Math.random()*SHAPES.length)];
-    p.style.cssText='position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;font-size:'+sz+'px;color:'+col+';pointer-events:none;z-index:99990;transform:translate(-50%,-50%);font-family:monospace;white-space:nowrap;text-shadow:0 0 4px '+col+';';
-    document.body.appendChild(p);
-    const tx=(Math.random()-.5)*30,ty=-(10+Math.random()*30),rot=(Math.random()-.5)*180;
-    p.animate([
-      {opacity:1,transform:`translate(-50%,-50%) rotate(0deg) scale(1)`},
-      {opacity:0,transform:`translate(calc(-50% + ${tx}px),calc(-50% + ${ty}px)) rotate(${rot}deg) scale(.3)`}
-    ],{duration:380+Math.random()*260,easing:'cubic-bezier(.2,1,.2,1)'}).onfinish=()=>p.remove();
-
-    // occasional second faint spark
-    if(Math.random()>.55){
+    if(now-last<12)return;last=now;
+    for(let i=0;i<2;i++){
+      const p=document.createElement('span');
+      const sz=6+Math.random()*14,col=COLS[Math.floor(Math.random()*COLS.length)];
+      p.textContent=SHAPES[Math.floor(Math.random()*SHAPES.length)];
+      p.style.cssText='position:fixed;left:'+(e.clientX+(Math.random()-.5)*12)+'px;top:'+(e.clientY+(Math.random()-.5)*12)+'px;font-size:'+sz+'px;color:'+col+';pointer-events:none;z-index:99990;transform:translate(-50%,-50%);font-family:monospace;white-space:nowrap;text-shadow:0 0 6px '+col+',0 0 12px '+col+';will-change:transform,opacity;';
+      document.body.appendChild(p);
+      const tx=(Math.random()-.5)*50,ty=-(8+Math.random()*40),rot=(Math.random()-.5)*240;
+      p.animate([
+        {opacity:1,transform:`translate(-50%,-50%) rotate(0deg) scale(1)`},
+        {opacity:0,transform:`translate(calc(-50% + ${tx}px),calc(-50% + ${ty}px)) rotate(${rot}deg) scale(.15)`}
+      ],{duration:320+Math.random()*280,easing:'cubic-bezier(.2,1,.2,1)'}).onfinish=()=>p.remove();
+    }
+    for(let j=0;j<3;j++){
       const p2=document.createElement('div');
-      p2.style.cssText='position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;width:2px;height:2px;background:rgba(185,28,46,.7);pointer-events:none;z-index:99989;transform:translate(-50%,-50%);';
+      const w=1+Math.random()*2.5;
+      p2.style.cssText='position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;width:'+w+'px;height:'+w+'px;background:rgba(185,28,46,.85);border-radius:50%;pointer-events:none;z-index:99989;transform:translate(-50%,-50%);box-shadow:0 0 4px rgba(185,28,46,.5);';
       document.body.appendChild(p2);
-      const tx2=(Math.random()-.5)*20,ty2=(Math.random()-.5)*20;
+      const tx2=(Math.random()-.5)*36,ty2=(Math.random()-.5)*36;
       p2.animate([
-        {opacity:.7,transform:`translate(-50%,-50%)`},
-        {opacity:0,transform:`translate(calc(-50% + ${tx2}px),calc(-50% + ${ty2}px))`}
-      ],{duration:280+Math.random()*200,easing:'ease-out'}).onfinish=()=>p2.remove();
+        {opacity:.9,transform:`translate(-50%,-50%) scale(1)`},
+        {opacity:0,transform:`translate(calc(-50% + ${tx2}px),calc(-50% + ${ty2}px)) scale(.2)`}
+      ],{duration:200+Math.random()*220,easing:'ease-out'}).onfinish=()=>p2.remove();
     }
   });
 })();
